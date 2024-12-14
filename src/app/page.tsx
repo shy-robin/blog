@@ -15,6 +15,21 @@ export default function Home() {
         />
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
+        <span className="flex gap-1 items-center">
+          <img
+            className="w-4 h-4 rounded-full"
+            src="https://beian.mps.gov.cn/web/assets/logo01.6189a29f.png"
+            alt="Profile"
+          />
+          <a
+            className="text-xs text-[#4e495a] hover:text-[#fff] transition-colors"
+            href="https://beian.mps.gov.cn/#/query/webSearch?code=11011402054462"
+            rel="noreferrer"
+            target="_blank"
+          >
+            京公网安备11011402054462
+          </a>
+        </span>
         <a
           className="text-xs text-[#4e495a] hover:text-[#fff] transition-colors"
           href="https://beian.miit.gov.cn/#/Integrated/index"
