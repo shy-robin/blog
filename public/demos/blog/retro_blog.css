@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+body {
+    font-family: 'VT323', monospace;
+    background-color: #000080; /* Navy Blue */
+    color: #00FF00; /* Bright Green */
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    border: 2px solid #C0C0C0; /* Silver */
+    padding: 20px;
+    background-color: #000;
+}
+
+header h1 {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px #FF00FF; /* Fuchsia */
+}
+
+.blink {
+    animation: blink-animation 1s steps(2, start) infinite;
+}
+
+@keyframes blink-animation {
+    to {
+        visibility: hidden;
+    }
+}
+
+article h2 {
+    font-size: 2em;
+    color: #FFFF00; /* Yellow */
+    margin-bottom: 10px;
+}
+
+.meta {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #00FF00;
+    padding-bottom: 10px;
+}
+
+p {
+    line-height: 1.4;
+    margin-bottom: 15px;
+}
+
+.link-box {
+    border: 2px dashed #FF00FF;
+    padding: 15px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.link-box a {
+    color: #00FFFF; /* Cyan */
+    text-decoration: none;
+    background-color: #800080; /* Purple */
+    padding: 5px 10px;
+}
+
+footer {
+    margin-top: 30px;
+    text-align: center;
+}
