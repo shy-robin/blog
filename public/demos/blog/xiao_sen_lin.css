@@ -1,0 +1,135 @@
+/* style.css for "小森林" Blog */
+
+:root {
+    --bg-color: #fefcf9;
+    --text-color: #6b655f;
+    --header-font-color: #5a8d71;
+    --accent-color: #e8a87c;
+    --card-bg-color: #ffffff;
+    --font-title: 'ZCOOL KuaiLe', cursive;
+    --font-body: 'Noto Sans SC', sans-serif; /* A clean font for body text */
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    margin: 0;
+    padding: 20px;
+    line-height: 1.7;
+}
+
+.page-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* --- Header --- */
+.main-header {
+    text-align: center;
+    padding: 20px 0;
+    border-bottom: 2px dashed var(--header-font-color);
+    margin-bottom: 40px;
+}
+
+.logo a {
+    font-family: var(--font-title);
+    font-size: 3rem;
+    color: var(--header-font-color);
+    text-decoration: none;
+}
+
+.main-nav ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.main-nav li {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+.main-nav a {
+    font-family: var(--font-title);
+    font-size: 1.1rem;
+    color: var(--header-font-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.main-nav a:hover, .main-nav a.active {
+    color: var(--accent-color);
+}
+
+/* --- Content --- */
+.content-area {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+}
+
+.post-card {
+    background-color: var(--card-bg-color);
+    border: 1px solid #f0ede9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+.post-image {
+    width: 100%;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+}
+
+.post-content {
+    padding: 25px;
+}
+
+.post-meta {
+    font-size: 0.85rem;
+    color: #b0a9a2;
+    margin-bottom: 10px;
+}
+
+.post-title {
+    margin: 0;
+}
+
+.post-title a {
+    font-family: var(--font-title);
+    font-size: 2rem;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.post-excerpt {
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+.read-more {
+    display: inline-block;
+    margin-top: 15px;
+    color: var(--accent-color);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* --- Footer --- */
+.main-footer {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid #f0ede9;
+    font-size: 0.9rem;
+    color: #b0a9a2;
+}
