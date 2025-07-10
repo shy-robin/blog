@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam&family=Lora&display=swap');
+
+body {
+    font-family: 'Lora', serif;
+    background-color: #F5F5DC; /* Beige */
+    color: #5D4037; /* Brown */
+    line-height: 1.7;
+}
+
+.container {
+    max-width: 750px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border: 1px solid #D7CCC8; /* Light Brown */
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-family: 'Kalam', cursive;
+    font-size: 3em;
+    color: #4E342E; /* Dark Brown */
+}
+
+article h2 {
+    font-family: 'Kalam', cursive;
+    font-size: 2.2em;
+    margin-bottom: 10px;
+}
+
+.meta {
+    color: #A1887F; /* Lighter Brown */
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+p {
+    margin-bottom: 15px;
+}
+
+.image-placeholder {
+    width: 100%;
+    height: 200px;
+    background-color: #C8E6C9; /* Light Green */
+    border: 1px dashed #81C784; /* Green */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    color: #558B2F; /* Dark Green */
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    color: #795548; /* Brown */
+}

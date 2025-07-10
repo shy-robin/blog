@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap');
+
+body {
+    font-family: 'Ma Shan Zheng', cursive;
+    background-color: #f7f7f7;
+    color: #333;
+    line-height: 2;
+    font-size: 18px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 40px;
+    background-color: #fff;
+    box-shadow: 0 0 30px rgba(0,0,0,0.05);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-family: 'ZCOOL QingKe HuangYou', sans-serif;
+    font-size: 4em;
+    color: #222;
+    font-weight: normal;
+}
+
+.title-seal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.title-seal h2 {
+    font-family: 'ZCOOL QingKe HuangYou', sans-serif;
+    font-size: 2.5em;
+    color: #444;
+    margin: 0;
+}
+
+.seal {
+    width: 50px;
+    height: 50px;
+    background-color: #c0392b;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-family: 'ZCOOL QingKe HuangYou', sans-serif;
+    border: 2px solid #a03024;
+    border-radius: 3px;
+}
+
+.meta {
+    text-align: right;
+    color: #888;
+    font-size: 0.9em;
+    margin-bottom: 30px;
+}
+
+p {
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+.ink-wash-image {
+    width: 100%;
+    height: 250px;
+    background: linear-gradient(to bottom, rgba(230,230,230,0.5), rgba(200,200,200,0.1)),
+                url('https://www.transparenttextures.com/patterns/rice-paper-2.png');
+    border: 1px solid #ddd;
+    margin: 30px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 2em;
+    letter-spacing: 10px;
+}
+
+footer {
+    text-align: center;
+    margin-top: 50px;
+    color: #aaa;
+    font-family: 'ZCOOL QingKe HuangYou', sans-serif;
+}
