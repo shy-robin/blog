@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "format": "prettier --write src tests docs \"*.{ts,mjs,json}\" \".*.json\"",
+    "format:check": "prettier --check src tests docs \"*.{ts,mjs,json}\" \".*.json\"",
+    "test": "esbuild tests/article-body.test.tsx --bundle --platform=node --packages=external --jsx=automatic --outfile=.test-output/article-body.cjs && node --test .test-output/article-body.cjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -10,17 +13,26 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@portabletext/react": "^3.2.4",
+    "@portabletext/types": "^2.0.15",
     "next": "^15.3.4",
+    "next-sanity": "^9.12.3",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "sanity": "^3.99.0",
+    "server-only": "^0.0.1",
+    "shiki": "^3.23.0",
+    "styled-components": "^6.6.0"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "esbuild": "^0.25.12",
     "eslint": "^8",
     "eslint-config-next": "^15.3.4",
     "postcss": "^8",
+    "prettier": "3.8.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }
