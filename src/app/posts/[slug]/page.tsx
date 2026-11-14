@@ -6,6 +6,7 @@ import { BlogShell } from "@/components/blog-shell";
 import { ArticleBody } from "@/components/article-body";
 import { getPost, getPosts, getHeadings, formatDate } from "@/sanity/posts";
 import { imageUrl, imageDimensions } from "@/sanity/images";
+import { postsUrl } from "@/lib/post-search";
 type Props = { params: Promise<{ slug: string }> };
 export const revalidate = 60;
 export async function generateStaticParams() {
@@ -52,7 +53,9 @@ export default async function PostPage({ params }: Props) {
           {!!post.tags?.length && (
             <ul className="tags" aria-label="文章标签">
               {post.tags.map((tag) => (
-                <li key={tag}>{tag}</li>
+                <li key={tag}>
+                  <Link href={postsUrl("", tag)}>{tag}</Link>
+                </li>
               ))}
             </ul>
           )}

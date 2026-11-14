@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { formatDate, type Post } from "@/sanity/posts";
+import { postsUrl } from "@/lib/post-search";
 export function PostList({ posts }: { posts: Post[] }) {
   if (!posts.length)
     return (
@@ -29,7 +30,9 @@ export function PostList({ posts }: { posts: Post[] }) {
             {!!post.tags?.length && (
               <ul className="tags" aria-label="文章标签">
                 {post.tags.map((tag) => (
-                  <li key={tag}>{tag}</li>
+                  <li key={tag}>
+                    <Link href={postsUrl("", tag)}>{tag}</Link>
+                  </li>
                 ))}
               </ul>
             )}
