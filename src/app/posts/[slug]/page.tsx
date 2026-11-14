@@ -7,6 +7,7 @@ import { ArticleBody } from "@/components/article-body";
 import { getPost, getPosts, getHeadings, formatDate } from "@/sanity/posts";
 import { imageUrl, imageDimensions } from "@/sanity/images";
 import { postsUrl } from "@/lib/post-search";
+import { Comments } from "@/components/comments";
 type Props = { params: Promise<{ slug: string }> };
 export const revalidate = 60;
 export async function generateStaticParams() {
@@ -96,6 +97,7 @@ export default async function PostPage({ params }: Props) {
           <span>感谢阅读</span>
           <Link href="/posts">继续浏览文章 →</Link>
         </div>
+        <Comments postId={post._id} />
       </article>
     </BlogShell>
   );
