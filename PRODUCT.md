@@ -22,6 +22,7 @@ ShyRobin 的个人站点，用于展示前端开发文章、项目实践和作�
 - 保留 ShyRobin 身份及中文写作。
 - 用户在对前次微调不满意后，明确要求借鉴 https://cali.so/ 的风格。
 - 用户选择“提供深浅色切换”。
+- 用户指定亮色采用 One Light，暗色采用 One Dark 配色。
 
 ## Product Principles
 

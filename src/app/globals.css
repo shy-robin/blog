@@ -2,26 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Personal reading space, inspired by the user-provided cali.so reference. */
+/* One Light / One Dark palettes; retain the reference-directed reading layout. */
 :root {
   color-scheme: light;
-  --background: #faf9f6;
-  --foreground: #292824;
-  --muted: #6b685f;
-  --accent: #a84e2e;
-  --line: #dedbd3;
-  --surface: #f1efe9;
+  --background: #fafafa;
+  --foreground: #383a42;
+  --muted: #626772;
+  --accent: #2f63cb;
+  --focus: #4078f2;
+  --line: #dbdbdc;
+  --surface: #eaeaeb;
   --button-foreground: #fff;
+  --selection-background: #e5e5e6;
+  --selection-foreground: #383a42;
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --background: #13120f;
-  --foreground: #ebe9e4;
-  --muted: #aaa59a;
-  --accent: #e6a37b;
-  --line: #37342d;
-  --surface: #1d1b17;
-  --button-foreground: #13120f;
+  --background: #282c34;
+  --foreground: #abb2bf;
+  --muted: #939baa;
+  --accent: #61afef;
+  --focus: #61afef;
+  --line: #3e4451;
+  --surface: #21252b;
+  --button-foreground: #282c34;
+  --selection-background: #3e4451;
+  --selection-foreground: #d7dae0;
 }
 body {
   color: var(--foreground);
@@ -30,8 +36,8 @@ body {
     var(--font-geist-sans), "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 ::selection {
-  color: var(--button-foreground);
-  background: var(--accent);
+  color: var(--selection-foreground);
+  background: var(--selection-background);
 }
 html {
   scrollbar-color: var(--line) var(--background);
@@ -86,7 +92,7 @@ button:focus-visible,
 input:focus-visible,
 summary:focus-visible,
 [tabindex="-1"]:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--focus);
   outline-offset: 4px;
 }
 :where(a, button, input) {

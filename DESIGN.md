@@ -10,11 +10,15 @@ No fabricated shelves, music collection, biography, portraits or project counts.
 
 ## Tokens
 
-Light: background #faf9f6, foreground #292824, muted #6b685f, surface #f1efe9, line #dedbd3, accent #a84e2e.
+User-selected palette: One Light for light mode, One Dark for dark mode. Layout and typography continue to follow the cali.so reference.
 
-Dark: background #13120f, foreground #ebe9e4, muted #aaa59a, surface #1d1b17, line #37342d, accent #e6a37b.
+One Light: background #fafafa, foreground #383a42, muted #626772, surface #eaeaeb, line #dbdbdc, focus #4078f2. Link/button accent #2f63cb is a darker blue for readable small text; selection #e5e5e6 with #383a42 text.
 
-All interface surfaces use semantic CSS variables, including forms, tags, empty states, code surrounds, focus, selection and the dock. Code syntax palettes retain their explicit contrast treatment.
+One Dark: background #282c34, foreground #abb2bf, muted #939baa, surface #21252b, line #3e4451, accent/focus #61afef. Selection #3e4451 with #d7dae0 text. Secondary text is brighter than syntax comments so article dates and navigation remain readable.
+
+All interface surfaces use semantic CSS variables, including forms, tags, empty states, code surrounds, focus, selection and the dock. Code blocks use Shiki's bundled `one-light` / `one-dark-pro` themes with CSS-variable switching. No external font or theme dependency is added.
+
+Palette sources: [One Light](https://github.com/atom/one-light-syntax/blob/master/styles/colors.less), [One Dark](https://github.com/atom/one-dark-syntax/blob/master/styles/colors.less), and the installed Shiki themes' VS Code UI color maps.
 
 ## Typography
 

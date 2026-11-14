@@ -58,6 +58,8 @@ test("renders headings, consecutive list items, safe links and escaped code", as
   assert.match(html, /class="shiki/);
   assert.match(html, /--shiki-dark/);
   assert.match(html, /--shiki-light/);
+  assert.match(html, /one-light/);
+  assert.match(html, /one-dark-pro/);
   assert.match(html, /(?:&lt;|&#x3C;)script/);
 });
 

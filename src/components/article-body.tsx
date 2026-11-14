@@ -39,7 +39,7 @@ async function HighlightedCode({ block }: { block: CodeBlock }) {
       : "text";
   const html = await codeToHtml(block.code || "", {
     lang,
-    themes: { light: "github-light", dark: "github-dark" },
+    themes: { light: "one-light", dark: "one-dark-pro" },
     defaultColor: false,
   });
   return (
