@@ -2,6 +2,15 @@ import Link from "next/link";
 import { BlogShell } from "@/components/blog-shell";
 import { PostList } from "@/components/post-list";
 import { getPosts } from "@/sanity/posts";
+import type { Metadata } from "next";
+import { absoluteUrl } from "@/lib/site";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: absoluteUrl("/"),
+    types: { "application/rss+xml": absoluteUrl("/feed.xml") },
+  },
+};
 export default async function Home() {
   const posts = await getPosts();
   return (

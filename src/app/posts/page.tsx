@@ -9,13 +9,45 @@ import {
   postsUrl,
   searchValue,
 } from "@/lib/post-search";
-export const metadata: Metadata = {
-  title: "文章",
-  description: "Web 前端开发的工程实践、技术方案与问题复盘。",
-};
+import { site, absoluteUrl } from "@/lib/site";
 type Props = {
   searchParams: Promise<{ q?: string | string[]; tag?: string | string[] }>;
 };
+
+export async function generateMetadata({
+  searchParams,
+}: Props): Promise<Metadata> {
+  const params = await searchParams;
+  const filtered = Boolean(searchValue(params.q) || searchValue(params.tag));
+  const title = "文章";
+  const description = "Web 前端开发的工程实践、技术方案与问题复盘。";
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: absoluteUrl("/posts"),
+      types: { "application/rss+xml": absoluteUrl("/feed.xml") },
+    },
+    robots: filtered
+      ? { index: false, follow: true }
+      : { index: true, follow: true },
+    openGraph: {
+      type: "website",
+      title: `${title} | ${site.name}`,
+      description,
+      url: absoluteUrl("/posts"),
+      siteName: site.name,
+      locale: "zh_CN",
+      images: [absoluteUrl("/og")],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} | ${site.name}`,
+      description,
+      images: [absoluteUrl("/og")],
+    },
+  };
+}
 
 export default async function PostsPage({ searchParams }: Props) {
   const [posts, params] = await Promise.all([getPosts(), searchParams]);

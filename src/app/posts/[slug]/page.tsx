@@ -8,6 +8,7 @@ import { getPost, getPosts, getHeadings, formatDate } from "@/sanity/posts";
 import { imageUrl, imageDimensions } from "@/sanity/images";
 import { postsUrl } from "@/lib/post-search";
 import { Comments } from "@/components/comments";
+import { getPostMetadata } from "@/lib/seo";
 type Props = { params: Promise<{ slug: string }> };
 export const revalidate = 60;
 export async function generateStaticParams() {
@@ -17,16 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPost(slug);
   if (!post) notFound();
-  return {
-    title: post.title,
-    description: post.excerpt,
-    openGraph: {
-      type: "article",
-      title: post.title,
-      description: post.excerpt,
-      publishedTime: post.publishedAt,
-    },
-  };
+  return getPostMetadata(post);
 }
 export default async function PostPage({ params }: Props) {
   const { slug } = await params;

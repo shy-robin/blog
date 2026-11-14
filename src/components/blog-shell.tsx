@@ -18,6 +18,7 @@ export function BlogShell({ children }: { children: React.ReactNode }) {
       <footer className="site-footer">
         <p>ShyRobin · 写下问题，也写下思考。</p>
         <div>
+          <a href="/feed.xml">RSS 订阅</a>
           <a
             href="https://beian.miit.gov.cn/#/Integrated/index"
             target="_blank"

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { site, absoluteUrl } from "@/lib/site";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -14,9 +15,26 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: { default: "ShyRobin · 前端实践与思考", template: "%s | ShyRobin" },
-  description:
-    "ShyRobin 的个人博客，记录 Web 前端工程实践、技术方案与生活思考。",
+  metadataBase: new URL(site.url),
+  title: { default: site.title, template: "%s | ShyRobin" },
+  description: site.description,
+  alternates: { types: { "application/rss+xml": absoluteUrl("/feed.xml") } },
+  openGraph: {
+    type: "website",
+    siteName: site.name,
+    title: site.title,
+    description: site.description,
+    locale: "zh_CN",
+    images: [
+      { url: absoluteUrl("/og"), width: 1200, height: 630, alt: site.title },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: site.title,
+    description: site.description,
+    images: [absoluteUrl("/og")],
+  },
 };
 
 export default function RootLayout({

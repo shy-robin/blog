@@ -22,6 +22,7 @@ export type Post = {
   slug: string;
   excerpt?: string;
   publishedAt?: string;
+  updatedAt?: string;
   tags?: string[];
   coverImage?: PostImage;
   body?: PostBody[];
@@ -35,7 +36,7 @@ const client = createClient({
   timeout: 15000,
 });
 const options = { next: { revalidate: 60, tags: ["posts"] } };
-const fields = `_id,title,"slug":slug.current,excerpt,publishedAt,tags,coverImage`;
+const fields = `_id,title,"slug":slug.current,excerpt,publishedAt,"updatedAt":_updatedAt,tags,coverImage`;
 export const getPosts = cache(
   async (): Promise<Post[]> =>
     client.fetch(
