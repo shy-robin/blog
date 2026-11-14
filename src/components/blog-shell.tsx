@@ -1,4 +1,18 @@
 import Link from "next/link";
+import { SiteIcon, type SiteIconName } from "./site-icon";
+import { ThemeToggle } from "./theme-toggle";
+
+const destinations: {
+  href: string;
+  label: string;
+  key: "home" | "posts" | "projects" | "about";
+  icon: SiteIconName;
+}[] = [
+  { href: "/", label: "首页", key: "home", icon: "home" },
+  { href: "/posts", label: "写作", key: "posts", icon: "writing" },
+  { href: "/projects", label: "项目", key: "projects", icon: "projects" },
+  { href: "/about", label: "关于", key: "about", icon: "about" },
+];
 export function BlogShell({
   children,
   active,
@@ -7,43 +21,32 @@ export function BlogShell({
   active?: "home" | "posts" | "projects" | "about";
 }) {
   return (
-    <div className="blog-shell">
+    <div className={`blog-shell${active === "home" ? " blog-shell-home" : ""}`}>
       <a className="skip-link" href="#main">
         跳到正文
       </a>
-      <header className="site-header">
-        <Link className="brand" href="/">
-          ShyRobin<span className="brand-dot">.</span>
-        </Link>
-        <nav aria-label="主导航">
-          <Link href="/" aria-current={active === "home" ? "page" : undefined}>
-            首页
+      {active !== "home" && (
+        <header className="site-header">
+          <Link className="brand" href="/">
+            ShyRobin<span className="brand-dot">.</span>
           </Link>
-          <Link
-            href="/posts"
-            aria-current={active === "posts" ? "page" : undefined}
-          >
-            文章
+          <Link className="header-index" href="/posts">
+            文章索引
           </Link>
-          <Link
-            href="/projects"
-            aria-current={active === "projects" ? "page" : undefined}
-          >
-            项目
-          </Link>
-          <Link
-            href="/about"
-            aria-current={active === "about" ? "page" : undefined}
-          >
-            关于
-          </Link>
-        </nav>
-      </header>
-      <main id="main">{children}</main>
+        </header>
+      )}
+      <main id="main" tabIndex={-1}>
+        {children}
+      </main>
       <footer className="site-footer">
-        <p>ShyRobin · 写下问题，也写下思考。</p>
+        <div className="footer-topline">
+          <p>在代码里探索，在文字中沉淀。</p>
+          <a href="/feed.xml">
+            <SiteIcon name="rss" /> RSS 订阅
+          </a>
+        </div>
+        <p className="footer-signature">ShyRobin · 个人写作与项目记录</p>
         <div>
-          <a href="/feed.xml">RSS 订阅</a>
           <a
             href="https://beian.miit.gov.cn/#/Integrated/index"
             target="_blank"
@@ -60,6 +63,21 @@ export function BlogShell({
           </a>
         </div>
       </footer>
+      <nav className="site-dock" aria-label="主导航">
+        {destinations.map((item) => (
+          <Link
+            key={item.key}
+            href={item.href}
+            aria-current={active === item.key ? "page" : undefined}
+          >
+            <SiteIcon name={item.icon} />
+            <span>{item.label}</span>
+          </Link>
+        ))}
+        <div className="dock-theme">
+          <ThemeToggle />
+        </div>
+      </nav>
     </div>
   );
 }

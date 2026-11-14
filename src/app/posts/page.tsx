@@ -59,7 +59,6 @@ export default async function PostsPage({ searchParams }: Props) {
   return (
     <BlogShell active="posts">
       <section className="page-intro">
-        <p className="eyebrow">NOTES ON THE WEB</p>
         <h1>
           文章<span className="article-count">{posts.length}</span>
         </h1>

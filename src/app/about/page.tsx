@@ -35,7 +35,6 @@ export default async function AboutPage() {
     <BlogShell active="about">
       <section className="about-intro">
         <div>
-          <p className="eyebrow">THE PERSON BEHIND THE WORDS</p>
           <h1>
             你好，我是
             <br />

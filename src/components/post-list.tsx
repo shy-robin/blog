@@ -1,11 +1,18 @@
 import Link from "next/link";
 import { formatDate, type Post } from "@/sanity/posts";
 import { postsUrl } from "@/lib/post-search";
-export function PostList({ posts }: { posts: Post[] }) {
+import { ArrowRight } from "./arrow-right";
+export function PostList({
+  posts,
+  headingLevel: Heading = "h2",
+}: {
+  posts: Post[];
+  headingLevel?: "h2" | "h3";
+}) {
   if (!posts.length)
     return (
       <div className="empty-state">
-        <h2>文章正在准备中</h2>
+        <Heading>文章正在准备中</Heading>
         <p>这里将记录前端开发中的实践与思考，欢迎下次再来。</p>
       </div>
     );
@@ -21,11 +28,11 @@ export function PostList({ posts }: { posts: Post[] }) {
             )}
           </div>
           <div>
-            <h2>
+            <Heading className="post-title">
               <Link href={`/posts/${encodeURIComponent(post.slug)}`}>
                 {post.title}
               </Link>
-            </h2>
+            </Heading>
             {post.excerpt && <p>{post.excerpt}</p>}
             {!!post.tags?.length && (
               <ul className="tags" aria-label="文章标签">
@@ -42,7 +49,7 @@ export function PostList({ posts }: { posts: Post[] }) {
             href={`/posts/${encodeURIComponent(post.slug)}`}
             aria-label={`阅读：${post.title}`}
           >
-            ↗
+            <ArrowRight />
           </Link>
         </article>
       ))}

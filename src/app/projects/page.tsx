@@ -16,7 +16,6 @@ export default async function ProjectsPage() {
   return (
     <BlogShell active="projects">
       <section className="page-intro">
-        <p className="eyebrow">BUILT WITH INTENT</p>
         <h1>
           项目<span className="article-count">{projects.length}</span>
         </h1>

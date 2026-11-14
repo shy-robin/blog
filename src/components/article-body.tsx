@@ -39,7 +39,8 @@ async function HighlightedCode({ block }: { block: CodeBlock }) {
       : "text";
   const html = await codeToHtml(block.code || "", {
     lang,
-    theme: "github-light",
+    themes: { light: "github-light", dark: "github-dark" },
+    defaultColor: false,
   });
   return (
     <figure className="code-block">

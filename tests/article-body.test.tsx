@@ -56,6 +56,8 @@ test("renders headings, consecutive list items, safe links and escaped code", as
   assert.doesNotMatch(html, /href="javascript:/);
   assert.doesNotMatch(html, /<script>/);
   assert.match(html, /class="shiki/);
+  assert.match(html, /--shiki-dark/);
+  assert.match(html, /--shiki-light/);
   assert.match(html, /(?:&lt;|&#x3C;)script/);
 });
 

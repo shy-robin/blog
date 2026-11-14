@@ -43,6 +43,19 @@ export function GiscusComments({
     if (!visible || !container) return;
     let active = true;
     let frame: HTMLIFrameElement | null = null;
+    function syncTheme() {
+      const theme =
+        document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+      frame?.contentWindow?.postMessage(
+        { giscus: { setConfig: { theme } } },
+        "https://giscus.app",
+      );
+    }
+    const themeObserver = new MutationObserver(syncTheme);
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
     setStatus("loading");
     const timer = window.setTimeout(() => {
       if (active) setStatus("error");
@@ -54,6 +67,7 @@ export function GiscusComments({
       frame.title = "文章评论（Giscus）";
       frame.onload = () => {
         if (!active) return;
+        syncTheme();
         window.clearTimeout(timer);
         setStatus("ready");
       };
@@ -67,6 +81,10 @@ export function GiscusComments({
       giscusAttributes(config, postId),
     ))
       script.setAttribute(name, value);
+    script.setAttribute(
+      "data-theme",
+      document.documentElement.dataset.theme === "dark" ? "dark" : "light",
+    );
     script.onerror = () => {
       if (active) {
         window.clearTimeout(timer);
@@ -78,6 +96,7 @@ export function GiscusComments({
       active = false;
       window.clearTimeout(timer);
       observer.disconnect();
+      themeObserver.disconnect();
       if (frame) frame.onload = null;
       script.onerror = null;
       container.replaceChildren();

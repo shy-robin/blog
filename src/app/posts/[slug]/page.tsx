@@ -66,11 +66,10 @@ export default async function PostPage({ params }: Props) {
           </div>
         )}
         <div className="article-layout">
-          <ArticleBody body={post.body || []} />
           {!!headings.length && (
-            <aside className="article-toc">
+            <details className="article-toc">
+              <summary>本文目录</summary>
               <nav aria-label="文章目录">
-                <p>本文目录</p>
                 <ul>
                   {headings.map((heading) => (
                     <li
@@ -82,8 +81,9 @@ export default async function PostPage({ params }: Props) {
                   ))}
                 </ul>
               </nav>
-            </aside>
+            </details>
           )}
+          <ArticleBody body={post.body || []} />
         </div>
         <div className="article-end">
           <span>感谢阅读</span>
