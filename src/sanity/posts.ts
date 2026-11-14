@@ -1,6 +1,6 @@
 import "server-only";
 import { cache } from "react";
-import { createClient } from "next-sanity";
+import { client } from "./client";
 import type { PortableTextBlock } from "@portabletext/types";
 
 export type PostImage = {
@@ -27,14 +27,6 @@ export type Post = {
   coverImage?: PostImage;
   body?: PostBody[];
 };
-const client = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "e4fd09lc",
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
-  apiVersion: "2025-02-19",
-  perspective: "published",
-  useCdn: false,
-  timeout: 15000,
-});
 const options = { next: { revalidate: 60, tags: ["posts"] } };
 const fields = `_id,title,"slug":slug.current,excerpt,publishedAt,"updatedAt":_updatedAt,tags,coverImage`;
 export const getPosts = cache(

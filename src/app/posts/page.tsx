@@ -57,7 +57,7 @@ export default async function PostsPage({ searchParams }: Props) {
   const tags = getTagCounts(posts);
   const hasFilters = Boolean(query || tag);
   return (
-    <BlogShell>
+    <BlogShell active="posts">
       <section className="page-intro">
         <p className="eyebrow">NOTES ON THE WEB</p>
         <h1>

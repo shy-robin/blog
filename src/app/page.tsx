@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default async function Home() {
   const posts = await getPosts();
   return (
-    <BlogShell>
+    <BlogShell active="home">
       <section className="home-intro">
         <p className="eyebrow">SHYROBIN / WEB DEVELOPMENT</p>
         <h1>

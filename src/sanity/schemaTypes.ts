@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
+import { portfolioSchemaTypes } from "./portfolio-schema";
 
 export const schemaTypes = [
   defineType({
@@ -88,4 +89,5 @@ export const schemaTypes = [
       },
     ],
   }),
+  ...portfolioSchemaTypes,
 ];

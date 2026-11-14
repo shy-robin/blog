@@ -27,7 +27,7 @@ export default async function PostPage({ params }: Props) {
   const headings = getHeadings(post.body);
   const cover = imageUrl(post.coverImage);
   return (
-    <BlogShell>
+    <BlogShell active="posts">
       <article className="article">
         <header className="article-header">
           <Link className="back-link" href="/posts">

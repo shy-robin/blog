@@ -1,6 +1,7 @@
 import { revalidateTag } from "next/cache";
 import { parseBody } from "next-sanity/webhook";
 import { NextRequest, NextResponse } from "next/server";
+import { contentCacheTag } from "@/lib/portfolio";
 
 export async function POST(request: NextRequest) {
   const secret = process.env.SANITY_REVALIDATE_SECRET;
@@ -16,12 +17,13 @@ export async function POST(request: NextRequest) {
     );
     if (!isValidSignature)
       return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
-    if (body?._type !== "post")
+    const tag = contentCacheTag(body?._type);
+    if (!tag)
       return NextResponse.json(
         { error: "Unsupported document type" },
         { status: 400 },
       );
-    revalidateTag("posts");
+    revalidateTag(tag);
     return NextResponse.json({ revalidated: true });
   } catch {
     return NextResponse.json(

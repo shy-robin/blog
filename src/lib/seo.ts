@@ -21,6 +21,12 @@ export function buildSitemap(posts: Post[]): MetadataRoute.Sitemap {
   return [
     { url: absoluteUrl("/"), changeFrequency: "weekly", priority: 1 },
     { url: absoluteUrl("/posts"), changeFrequency: "weekly", priority: 0.8 },
+    {
+      url: absoluteUrl("/projects"),
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    { url: absoluteUrl("/about"), changeFrequency: "monthly", priority: 0.6 },
     ...publicPosts(posts).map((post) => ({
       url: postUrl(post.slug),
       lastModified: validDate(post.updatedAt) || validDate(post.publishedAt),
@@ -114,6 +120,45 @@ export function getPostMetadata(post: Post): Metadata {
     twitter: {
       card: "summary_large_image",
       title: post.title,
+      description,
+      images,
+    },
+  };
+}
+
+export function getPageMetadata(
+  title: string,
+  path: string,
+  description: string,
+): Metadata {
+  const url = absoluteUrl(path);
+  const images = [
+    {
+      url: absoluteUrl("/og"),
+      width: 1200,
+      height: 630,
+      alt: `${title} | ${site.name}`,
+    },
+  ];
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: url,
+      types: { "application/rss+xml": absoluteUrl("/feed.xml") },
+    },
+    openGraph: {
+      type: "website",
+      title: `${title} | ${site.name}`,
+      description,
+      url,
+      siteName: site.name,
+      locale: "zh_CN",
+      images,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} | ${site.name}`,
       description,
       images,
     },

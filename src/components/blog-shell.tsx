@@ -1,5 +1,11 @@
 import Link from "next/link";
-export function BlogShell({ children }: { children: React.ReactNode }) {
+export function BlogShell({
+  children,
+  active,
+}: {
+  children: React.ReactNode;
+  active?: "home" | "posts" | "projects" | "about";
+}) {
   return (
     <div className="blog-shell">
       <a className="skip-link" href="#main">
@@ -10,8 +16,27 @@ export function BlogShell({ children }: { children: React.ReactNode }) {
           ShyRobin<span className="brand-dot">.</span>
         </Link>
         <nav aria-label="主导航">
-          <Link href="/">首页</Link>
-          <Link href="/posts">文章</Link>
+          <Link href="/" aria-current={active === "home" ? "page" : undefined}>
+            首页
+          </Link>
+          <Link
+            href="/posts"
+            aria-current={active === "posts" ? "page" : undefined}
+          >
+            文章
+          </Link>
+          <Link
+            href="/projects"
+            aria-current={active === "projects" ? "page" : undefined}
+          >
+            项目
+          </Link>
+          <Link
+            href="/about"
+            aria-current={active === "about" ? "page" : undefined}
+          >
+            关于
+          </Link>
         </nav>
       </header>
       <main id="main">{children}</main>

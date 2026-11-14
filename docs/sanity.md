@@ -27,7 +27,11 @@
 
 1. 在部署平台设置一个随机的 `SANITY_REVALIDATE_SECRET` 环境变量，并重新部署。
 2. 在 Sanity 项目的 API → Webhooks 创建 webhook：URL 填写 `https://你的域名/api/revalidate`，方法 POST，选择 production 数据集，启用 Create、Update、Delete。
-3. Filter 填写 `_type == "post"`，Projection 填写 `{_type}`，Secret 填写同一密钥。不要启用草稿触发。
+3. Filter 填写 `_type in ["post", "project", "profile"]`，Projection 填写 `{_type}`，Secret 填写同一密钥。不要启用草稿触发。
 4. 发布、更新或删除文章后验证 webhook 投递成功。接口校验签名后清除文章缓存，下次访问将读取新内容。
 
 本地的 localhost 无法接收 Sanity 云端 webhook，开发时使用默认缓存刷新即可。不需要在公开聊天或前端代码中填写该密钥。
+
+## 个人资料与项目
+
+后台新增“项目”和“个人资料”入口，分别用于管理 `/projects` 和 `/about` 内容。资料只需维护一份，项目可创建多个；均通过 Publish 公开。详见 [编辑说明](portfolio.md)。
