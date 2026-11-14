@@ -353,43 +353,169 @@ summary:focus-visible,
   transform: translateX(-50%);
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
   max-width: calc(100vw - 24px);
-  padding: 6px;
+  padding: 4px;
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: 999px;
   background: var(--background);
+  transition:
+    background-color 180ms ease-out,
+    border-color 180ms ease-out;
 }
-.site-dock > a,
-.theme-toggle {
+.dock-links {
+  position: relative;
   display: flex;
-  flex-direction: column;
+  gap: 4px;
+  isolation: isolate;
+}
+.dock-profile > a,
+.dock-links > a,
+.theme-toggle {
+  position: relative;
+  display: flex;
   justify-content: center;
   align-items: center;
-  gap: 4px;
-  width: 56px;
-  min-height: 52px;
-  border-radius: 12px;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 50%;
   color: var(--muted);
-  font-size: 10px;
-  line-height: 1.2;
+  transition:
+    color 160ms ease-out,
+    background-color 160ms ease-out;
 }
-.site-dock > a[aria-current="page"] {
+.dock-indicator {
+  position: absolute;
+  inset: 0 auto 0 0;
+  z-index: -1;
+  width: 44px;
+  border-radius: 50%;
   background: var(--surface);
-  color: var(--foreground);
+  transform: translateX(calc(var(--dock-index) * 48px));
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 160ms ease-out;
 }
-.site-dock > a:hover,
-.theme-toggle:hover {
-  color: var(--foreground);
-  background: var(--surface);
+.dock-indicator[data-visible="true"] {
+  opacity: 1;
 }
-.site-dock > a[aria-current="page"] svg {
+.dock-links > a[aria-current="page"] {
   color: var(--accent);
 }
+.dock-links > a:hover,
+.dock-links > a:focus-visible,
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  color: var(--foreground);
+}
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  background: var(--surface);
+}
+.dock-profile > a[aria-current="page"],
+.dock-profile > a:hover,
+.dock-profile > a:focus-visible {
+  background: var(--surface);
+}
+.dock-profile > a[aria-current="page"] .dock-avatar {
+  outline-color: var(--accent);
+}
+.dock-profile,
 .dock-theme {
-  border-left: 1px solid var(--line);
-  padding-left: 4px;
-  margin-left: 2px;
+  display: flex;
+  align-items: center;
+}
+.dock-separator {
+  flex-shrink: 0;
+  width: 1px;
+  height: 24px;
+  background: var(--line);
+}
+.dock-avatar {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  overflow: hidden;
+  border-radius: 50%;
+  outline: 1px solid var(--line);
+  outline-offset: 2px;
+  background: var(--surface);
+  color: var(--foreground);
+  font-size: 13px;
+  font-weight: 600;
+  transition:
+    transform 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    outline-color 160ms ease-out;
+}
+.dock-avatar img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.dock-icon {
+  flex-shrink: 0;
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+@media (hover: hover) {
+  .dock-profile > a:hover .dock-avatar {
+    transform: scale(1.06);
+  }
+  .dock-links > a:hover .dock-icon,
+  .theme-toggle:hover .dock-icon {
+    transform: translateY(-1px) scale(1.08);
+  }
+}
+.dock-links > a:active .dock-icon,
+.theme-toggle:active .dock-icon {
+  transform: scale(0.9);
+  transition-duration: 100ms;
+}
+.dock-label {
+  position: absolute;
+  bottom: calc(100% + 14px);
+  left: 50%;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  color: var(--foreground);
+  background: var(--background);
+  font-size: 12px;
+  line-height: 1.5;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(-50%, 4px);
+  transition:
+    opacity 160ms ease-out,
+    transform 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 160ms;
+}
+.dock-profile > a:hover .dock-label,
+.dock-profile > a:focus-visible .dock-label,
+.dock-links > a:hover .dock-label,
+.dock-links > a:focus-visible .dock-label,
+.theme-toggle:hover .dock-label,
+.theme-toggle:focus-visible .dock-label {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+.dock-theme .dock-label {
+  left: auto;
+  right: 0;
+  transform: translateY(4px);
+}
+.dock-theme .theme-toggle:hover .dock-label,
+.dock-theme .theme-toggle:focus-visible .dock-label {
+  transform: translateY(0);
 }
 .page-intro {
   padding: 44px 0 32px;
@@ -1105,15 +1231,19 @@ summary:focus-visible,
     margin-top: 60px;
   }
 }
-@media (max-width: 380px) {
-  .site-dock > a,
-  .theme-toggle {
-    width: 48px;
-  }
-}
 @media (prefers-reduced-motion: reduce) {
   .blog-shell a,
-  .theme-toggle {
+  .site-dock,
+  .theme-toggle,
+  .dock-icon,
+  .dock-avatar,
+  .dock-label,
+  .dock-indicator {
     transition: none;
+  }
+  .dock-links > a .dock-icon,
+  .theme-toggle .dock-icon,
+  .dock-profile > a .dock-avatar {
+    transform: none;
   }
 }

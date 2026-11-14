@@ -27,3 +27,7 @@ Existing self-hosted Geist and Chinese system fallback match the quiet contempor
 ## Interaction
 
 44px minimum navigation and theme targets, visible keyboard outline, native links and preserved skip link. Light/dark follows system preference until explicitly chosen; persist explicit choice when storage is available. Apply theme before paint. With storage blocked, switching still works in memory. Respect reduced motion.
+
+The bottom navigation is a compact 54px-high capsule with 44×44px targets. Three regions are separated by two 1px vertical rules: the author's 28px avatar linking to `/about`, the three page links (home, writing, projects), and display settings (theme switch). Use the real Sanity profile avatar; missing or failed images fall back to the author's initial without inventing a portrait. The about page highlights the avatar, not a duplicate page icon.
+
+Following the user's cali.so reference, icons use precise rounded 1.5px strokes and quiet duotone fills. Route names appear as hover/focus tooltips and remain accessible names on every link. A shared highlight slides between hovered/focused page targets with a 260ms decelerating transition, returning to the actual route on exit; only the actual route carries aria-current. Icons and avatar have restrained interaction feedback. Reduced-motion mode removes spatial transitions while preserving visible state and keyboard focus. Palette and page layout stay unchanged.

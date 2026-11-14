@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { SiteIcon } from "./site-icon";
+import { DockIcon } from "./dock-icon";
 import { themeStorageKey } from "@/lib/theme";
 
 type Theme = "light" | "dark";
@@ -76,10 +76,11 @@ export function ThemeToggle() {
       className="theme-toggle"
       onClick={toggle}
       aria-label={label}
-      title={label}
     >
-      <SiteIcon name={theme === "dark" ? "sun" : "moon"} />
-      <span>{theme === "dark" ? "浅色" : "深色"}</span>
+      <DockIcon name={theme === "dark" ? "sun" : "moon"} />
+      <span className="dock-label" aria-hidden="true">
+        {label}
+      </span>
     </button>
   );
 }

@@ -1,25 +1,20 @@
 import Link from "next/link";
-import { SiteIcon, type SiteIconName } from "./site-icon";
-import { ThemeToggle } from "./theme-toggle";
+import { SiteIcon } from "./site-icon";
+import { BottomNav, type NavPage } from "./bottom-nav";
+import { getProfile } from "@/sanity/portfolio";
+import { displayProfile } from "@/lib/portfolio";
+import { imageUrl } from "@/sanity/images";
 
-const destinations: {
-  href: string;
-  label: string;
-  key: "home" | "posts" | "projects" | "about";
-  icon: SiteIconName;
-}[] = [
-  { href: "/", label: "首页", key: "home", icon: "home" },
-  { href: "/posts", label: "写作", key: "posts", icon: "writing" },
-  { href: "/projects", label: "项目", key: "projects", icon: "projects" },
-  { href: "/about", label: "关于", key: "about", icon: "about" },
-];
-export function BlogShell({
+export async function BlogShell({
   children,
   active,
 }: {
   children: React.ReactNode;
-  active?: "home" | "posts" | "projects" | "about";
+  active?: NavPage;
 }) {
+  // Navigation should remain usable if the optional profile cannot be loaded.
+  const profile = displayProfile(await getProfile().catch(() => null));
+  const avatarUrl = imageUrl(profile.avatar, 80);
   return (
     <div className={`blog-shell${active === "home" ? " blog-shell-home" : ""}`}>
       <a className="skip-link" href="#main">
@@ -63,21 +58,7 @@ export function BlogShell({
           </a>
         </div>
       </footer>
-      <nav className="site-dock" aria-label="主导航">
-        {destinations.map((item) => (
-          <Link
-            key={item.key}
-            href={item.href}
-            aria-current={active === item.key ? "page" : undefined}
-          >
-            <SiteIcon name={item.icon} />
-            <span>{item.label}</span>
-          </Link>
-        ))}
-        <div className="dock-theme">
-          <ThemeToggle />
-        </div>
-      </nav>
+      <BottomNav active={active} avatarUrl={avatarUrl} name={profile.name} />
     </div>
   );
 }
