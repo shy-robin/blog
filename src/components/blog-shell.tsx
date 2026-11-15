@@ -16,20 +16,18 @@ export async function BlogShell({
   const profile = displayProfile(await getProfile().catch(() => null));
   const avatarUrl = imageUrl(profile.avatar, 80);
   return (
-    <div className={`blog-shell${active === "home" ? " blog-shell-home" : ""}`}>
+    <div className="blog-shell">
       <a className="skip-link" href="#main">
         跳到正文
       </a>
-      {active !== "home" && (
-        <header className="site-header">
-          <Link className="brand" href="/">
-            ShyRobin<span className="brand-dot">.</span>
-          </Link>
-          <Link className="header-index" href="/posts">
-            文章索引
-          </Link>
-        </header>
-      )}
+      <header className="site-header">
+        <Link className="brand" href="/posts">
+          ShyRobin<span className="brand-dot">.</span>
+        </Link>
+        <Link className="header-index" href="/posts">
+          文章索引
+        </Link>
+      </header>
       <main id="main" tabIndex={-1}>
         {children}
       </main>

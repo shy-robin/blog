@@ -19,8 +19,7 @@ function validDate(value?: string) {
 
 export function buildSitemap(posts: Post[]): MetadataRoute.Sitemap {
   return [
-    { url: absoluteUrl("/"), changeFrequency: "weekly", priority: 1 },
-    { url: absoluteUrl("/posts"), changeFrequency: "weekly", priority: 0.8 },
+    { url: absoluteUrl("/posts"), changeFrequency: "weekly", priority: 1 },
     {
       url: absoluteUrl("/projects"),
       changeFrequency: "monthly",
@@ -72,7 +71,7 @@ export function buildRss(posts: Post[]) {
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>${escapeXml(site.title)}</title>
-    <link>${escapeXml(absoluteUrl("/"))}</link>
+    <link>${escapeXml(absoluteUrl("/posts"))}</link>
     <description>${escapeXml(site.description)}</description>
     <language>zh-CN</language>
     <atom:link href="${escapeXml(absoluteUrl("/feed.xml"))}" rel="self" type="application/rss+xml" />

@@ -24,12 +24,13 @@ test("site URLs use a stable origin and reject credentials and non-web schemes",
 });
 test("sitemap includes public pages and published article URLs with real modified dates", () => {
   const entries = buildSitemap(posts);
-  assert.equal(entries.length, 5);
+  assert.equal(entries.length, 4);
   assert.equal(
-    entries[4].url,
+    entries[3].url,
     `${site.url}/posts/${encodeURIComponent(posts[0].slug)}`,
   );
-  assert.equal(entries[4].lastModified, "2026-11-14T12:00:00.000Z");
+  assert.equal(entries[3].lastModified, "2026-11-14T12:00:00.000Z");
+  assert.ok(!entries.some((entry) => entry.url === `${site.url}/`));
   assert.ok(entries.some((entry) => entry.url.endsWith("/about")));
   assert.ok(entries.some((entry) => entry.url.endsWith("/projects")));
   assert.ok(

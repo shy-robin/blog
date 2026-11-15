@@ -116,6 +116,7 @@ export default async function AboutPage() {
             <div className="about-actions">
               <Link href="/posts">阅读文章 →</Link>
               <Link href="/projects">看看项目 →</Link>
+              <a href="/feed.xml">通过 RSS 订阅更新 →</a>
             </div>
           </div>
         </section>

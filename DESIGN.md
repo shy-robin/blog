@@ -4,7 +4,7 @@ Reference-directed redesign of the existing site following the user's request to
 
 ## Layout and hierarchy
 
-A narrow, centered personal page (680px outer column) with fine vertical boundary rules. Compact identity, readable first-person paragraphs, small editorial section headings and a lean writing index. Subpages share this frame. A fixed bottom dock carries four labeled destinations and a theme switch. Reserve bottom space and safe-area inset so it never hides content or keyboard focus.
+A narrow, centered personal page (680px outer column) with fine vertical boundary rules. The article index is the default entry; `/` permanently redirects to `/posts`, preserving query parameters. Personal introduction, blog purpose, project links and RSS subscription live together on the about page. There is no separate home page. Subpages share this frame. A fixed bottom dock carries four labeled destinations and a theme switch. Reserve bottom space and safe-area inset so it never hides content or keyboard focus.
 
 No fabricated shelves, music collection, biography, portraits or project counts. Render only real published content; section labels describe content rather than arbitrary sequence numbers.
 
@@ -22,7 +22,7 @@ Palette sources: [One Light](https://github.com/atom/one-light-syntax/blob/maste
 
 ## Typography
 
-Existing self-hosted Geist and Chinese system fallback match the quiet contemporary reference. Identity 30px; prose 15px with 1.95 line height; utility text 12–13px; compact writing titles 15px. Article list titles are 20px on desktop and 18px on mobile. Inner article bodies use 16px on desktop and 15px on mobile, with a 2.0 line height. Monospace only for dates, counts and code.
+Existing self-hosted Geist and Chinese system fallback match the quiet contemporary reference. Utility text is 12–13px; the about page carries the personal introduction. Article list titles are 20px on desktop and 18px on mobile. Inner article bodies use 16px on desktop and 15px on mobile, with a 2.0 line height. Monospace only for dates, counts and code.
 
 Reading refinements retain the narrow frame and existing content. List excerpts are limited to three lines; full text stays on the article page. Article tags use quiet text links with 44px touch targets. On phones, filter tags form one horizontally scrollable row so the writing remains near the top of the page. Quotes and the table of contents use a subtle semantic surface (#f3f3f4 / #2c313a); code blocks scroll internally and never widen the page.
 
@@ -30,6 +30,6 @@ Reading refinements retain the narrow frame and existing content. List excerpts 
 
 44px minimum navigation and theme targets, visible keyboard outline, native links and preserved skip link. Light/dark follows system preference until explicitly chosen; persist explicit choice when storage is available. Apply theme before paint. With storage blocked, switching still works in memory. Respect reduced motion.
 
-The bottom navigation is a compact 54px-high capsule with 44×44px targets. Three regions are separated by two 1px vertical rules: the author's 28px avatar linking to `/about`, the three page links (home, writing, projects), and display settings (theme switch). Use the real Sanity profile avatar without a background or decorative ring; missing or failed images fall back to the author's initial without inventing a portrait. The about page marks the avatar destination, not a duplicate page icon.
+The bottom navigation is a compact 54px-high capsule with 44×44px targets. Three regions are separated by two 1px vertical rules: the author's 28px avatar linking to `/about`, the two page links (writing, projects), and display settings (theme switch). Use the real Sanity profile avatar without a background or decorative ring; missing or failed images fall back to the author's initial without inventing a portrait. The about page marks the avatar destination, not a duplicate page icon.
 
 Following the user's cali.so reference, icons use precise rounded 1.5px strokes and quiet duotone fills. Route names appear as tooltips for fine-pointer hover or keyboard focus and remain accessible names on every link. Touch taps do not show hover tooltips. A 4px accent dot below the icon (or avatar on the about page) marks only the actual route through aria-current; navigation targets have no selected background. Icons and avatar have restrained interaction feedback. Reduced-motion mode removes spatial transitions while preserving visible state and keyboard focus. Palette and page layout stay unchanged.

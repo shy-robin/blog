@@ -6,14 +6,13 @@ import { useState } from "react";
 import { DockIcon, type DockIconName } from "./dock-icon";
 import { ThemeToggle } from "./theme-toggle";
 
-export type NavPage = "home" | "posts" | "projects" | "about";
+export type NavPage = "posts" | "projects" | "about";
 const destinations: {
   href: string;
   label: string;
   key: NavPage;
   icon: DockIconName;
 }[] = [
-  { href: "/", label: "首页", key: "home", icon: "home" },
   { href: "/posts", label: "写作", key: "posts", icon: "writing" },
   { href: "/projects", label: "项目", key: "projects", icon: "projects" },
 ];
