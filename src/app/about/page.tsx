@@ -1,16 +1,10 @@
-import Link from "next/link";
 import type { Metadata } from "next";
 import { BlogShell } from "@/components/blog-shell";
 import { SanityImage } from "@/components/sanity-image";
 import { getProfile } from "@/sanity/portfolio";
-import {
-  displayProfile,
-  safeExternalUrl,
-  contactEmailUrl,
-} from "@/lib/portfolio";
+import { displayProfile, contactEmailUrl, profileInfo } from "@/lib/portfolio";
 import { imageUrl, imageDimensions } from "@/sanity/images";
 import { getPageMetadata } from "@/lib/seo";
-import { ArrowRight } from "@/components/arrow-right";
 
 export const revalidate = 60;
 export async function generateMetadata(): Promise<Metadata> {
@@ -25,8 +19,10 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function AboutPage() {
   const profile = displayProfile(await getProfile());
   const avatar = imageUrl(profile.avatar, 400);
-  const github = safeExternalUrl(profile.githubUrl);
   const email = contactEmailUrl(profile.email);
+  const qq = profile.qq?.trim();
+  const wechat = profile.wechat?.trim();
+  const basicInfo = profileInfo(profile);
   const avatarFallback = (
     <span className="profile-initial" aria-hidden="true">
       {profile.name.slice(0, 1).toUpperCase()}
@@ -43,12 +39,10 @@ export default async function AboutPage() {
       <section className="about-intro">
         <div>
           <h1>
-            你好，我是 <span>{profile.name}</span>。
+            {profile.name}
+            <span className="brand-dot">.</span>
           </h1>
           <p className="about-headline">{profile.intro}</p>
-          {profile.location && (
-            <p className="about-location">{profile.location}</p>
-          )}
         </div>
         <div className="profile-avatar">
           {avatar ? (
@@ -66,6 +60,20 @@ export default async function AboutPage() {
         </div>
       </section>
       <div className="about-sections">
+        <section
+          className="about-basic-info"
+          aria-labelledby="basic-info-heading"
+        >
+          <h2 id="basic-info-heading">基本信息</h2>
+          <dl>
+            {basicInfo.map((item) => (
+              <div key={item._key}>
+                <dt>{item.label}</dt>
+                <dd>{item.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
         {!!paragraphs.length && (
           <section className="about-section">
             <h2>关于</h2>
@@ -116,30 +124,33 @@ export default async function AboutPage() {
               这里以 Web
               前端文章为主，记录真实工程中的问题、分析过程与方案取舍，也保留一些生活里的思考。
             </p>
-            <div className="about-actions">
-              <Link href="/posts">
-                阅读文章 <ArrowRight />
-              </Link>
-              <Link href="/projects">
-                看看项目 <ArrowRight />
-              </Link>
-              <a href="/feed.xml">
-                通过 RSS 订阅更新 <ArrowRight />
-              </a>
-            </div>
           </div>
         </section>
-        {(github || email) && (
+        {(email || qq || wechat) && (
           <section className="about-section">
-            <h2>保持联系</h2>
-            <div className="about-actions">
-              {github && (
-                <a href={github} target="_blank" rel="noreferrer">
-                  GitHub <ArrowRight />
-                </a>
+            <h2>联系方式</h2>
+            <dl className="about-contact-list">
+              {email && (
+                <div>
+                  <dt>邮箱</dt>
+                  <dd>
+                    <a href={email}>{profile.email}</a>
+                  </dd>
+                </div>
               )}
-              {email && <a href={email}>{profile.email}</a>}
-            </div>
+              {qq && (
+                <div>
+                  <dt>扣扣</dt>
+                  <dd>{qq}</dd>
+                </div>
+              )}
+              {wechat && (
+                <div>
+                  <dt>微信</dt>
+                  <dd>{wechat}</dd>
+                </div>
+              )}
+            </dl>
           </section>
         )}
       </div>

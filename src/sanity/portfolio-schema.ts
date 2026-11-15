@@ -81,6 +81,61 @@ export const portfolioSchemaTypes = [
         fields: imageFields,
       }),
       defineField({
+        name: "gender",
+        title: "性别（可选）",
+        type: "string",
+      }),
+      defineField({
+        name: "birthDate",
+        title: "出生日期（可选）",
+        type: "date",
+        description: "前台按北京时间自动计算年龄，不直接显示完整出生日期。",
+      }),
+      defineField({
+        name: "hometown",
+        title: "籍贯（可选）",
+        type: "string",
+      }),
+      defineField({
+        name: "school",
+        title: "学校（可选）",
+        type: "string",
+      }),
+      defineField({
+        name: "occupation",
+        title: "职业（可选）",
+        type: "string",
+      }),
+      defineField({
+        name: "basicInfo",
+        title: "基本信息（可选）",
+        description:
+          "可添加其他公开资料，如称呼。性别、年龄、籍贯、学校和职业使用上方专用字段，城市不显示。未填写时保留展示名字。",
+        type: "array",
+        of: [
+          defineArrayMember({
+            type: "object",
+            name: "profileInfo",
+            title: "资料项",
+            fields: [
+              defineField({
+                name: "label",
+                title: "名称",
+                type: "string",
+                validation: (rule) => rule.required(),
+              }),
+              defineField({
+                name: "value",
+                title: "内容",
+                type: "string",
+                validation: (rule) => rule.required(),
+              }),
+            ],
+            preview: { select: { title: "label", subtitle: "value" } },
+          }),
+        ],
+      }),
+      defineField({
         name: "interests",
         title: "关注方向 / 技术标签",
         type: "array",

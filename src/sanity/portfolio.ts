@@ -9,6 +9,7 @@ export const getProfile = cache(
       `*[_type == "profile" && _id == "profile"][0]{
         name,intro,bio,avatar,location,
         githubUrl,email,qq,wechat,wechatQrCode,
+        basicInfo,gender,birthDate,hometown,school,occupation,
         interests,experiences
       }`,
       {},

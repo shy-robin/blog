@@ -18,6 +18,12 @@ export type Profile = {
   qq?: string;
   wechat?: string;
   wechatQrCode?: PostImage;
+  basicInfo?: { _key: string; label: string; value: string }[];
+  gender?: string;
+  birthDate?: string;
+  hometown?: string;
+  school?: string;
+  occupation?: string;
   interests?: string[];
   experiences?: Experience[];
 };
@@ -42,6 +48,65 @@ export function displayProfile(profile: Profile | null) {
     interests: profile?.interests || [],
     experiences: profile?.experiences || [],
   };
+}
+
+export function profileAge(birthDate?: string, now = new Date()) {
+  if (!birthDate || !/^\d{4}-\d{2}-\d{2}$/.test(birthDate)) return undefined;
+  const birthday = new Date(`${birthDate}T00:00:00Z`);
+  if (
+    Number.isNaN(birthday.getTime()) ||
+    birthday.toISOString().slice(0, 10) !== birthDate
+  )
+    return undefined;
+  const parts = new Intl.DateTimeFormat("en", {
+    timeZone: "Asia/Shanghai",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(now);
+  const part = (type: string) =>
+    Number(parts.find((item) => item.type === type)?.value);
+  const [year, month, day] = birthDate.split("-").map(Number);
+  const age =
+    part("year") -
+    year -
+    (part("month") < month || (part("month") === month && part("day") < day)
+      ? 1
+      : 0);
+  return age >= 0 ? age : undefined;
+}
+
+export function profileInfo(profile: Profile, now = new Date()) {
+  const age = profileAge(profile.birthDate, now);
+  const details = [
+    { _key: "gender", label: "性别", value: profile.gender?.trim() },
+    {
+      _key: "age",
+      label: "年龄",
+      value: age === undefined ? undefined : `${age} 岁`,
+    },
+    { _key: "hometown", label: "籍贯", value: profile.hometown?.trim() },
+    { _key: "school", label: "学校", value: profile.school?.trim() },
+    { _key: "occupation", label: "职业", value: profile.occupation?.trim() },
+  ].filter((item): item is { _key: string; label: string; value: string } =>
+    Boolean(item.value),
+  );
+  const provided = (profile.basicInfo || []).filter(
+    (item) =>
+      item.label?.trim() &&
+      item.value?.trim() &&
+      !["城市", "所在城市"].includes(item.label.trim()) &&
+      !details.some((detail) => detail.label === item.label.trim()),
+  );
+  const name = profile.name?.trim();
+  return [
+    ...(provided.length
+      ? provided
+      : name
+        ? [{ _key: "display-name", label: "称呼", value: name }]
+        : []),
+    ...details,
+  ];
 }
 
 export function safeExternalUrl(value?: string) {

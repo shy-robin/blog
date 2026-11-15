@@ -719,8 +719,9 @@ summary:focus-visible,
   display: grid;
   grid-template-columns: minmax(0, 1fr) 112px;
   align-items: center;
-  gap: 32px;
-  padding: 64px 0 48px;
+  gap: 24px;
+  padding: 48px 0 44px;
+  text-align: left;
 }
 .about-intro h1 {
   font-size: clamp(26px, 3vw, 32px);
@@ -739,13 +740,8 @@ summary:focus-visible,
   line-height: 1.9;
   font-size: 15px;
 }
-.about-location {
-  margin-top: 14px;
-  font-size: 12px;
-  color: var(--muted);
-}
 .profile-avatar {
-  width: 100%;
+  width: 112px;
   aspect-ratio: 1;
   display: flex;
   align-items: center;
@@ -764,6 +760,32 @@ summary:focus-visible,
 }
 .about-sections {
   width: 100%;
+}
+.about-basic-info {
+  padding-bottom: 36px;
+}
+.about-basic-info h2 {
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+}
+.about-basic-info dl > div {
+  display: grid;
+  grid-template-columns: minmax(0, 96px) minmax(0, 1fr);
+  gap: 12px;
+  padding-block: 6px;
+  font-size: 15px;
+  line-height: 1.9;
+}
+.about-basic-info dt {
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+.about-basic-info dd {
+  overflow-wrap: anywhere;
 }
 .about-section {
   display: grid;
@@ -822,6 +844,27 @@ summary:focus-visible,
 }
 .about-copy .about-actions {
   margin-top: 20px;
+}
+.about-contact-list > div {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  font-size: 15px;
+  line-height: 1.9;
+}
+.about-contact-list dt {
+  color: var(--muted);
+}
+.about-contact-list dd {
+  overflow-wrap: anywhere;
+}
+.about-contact-list a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--accent);
 }
 .experience-list li {
   position: relative;
@@ -1197,16 +1240,15 @@ summary:focus-visible,
   }
   .about-intro {
     grid-template-columns: minmax(0, 1fr) 80px;
-    gap: 16px;
-    padding: 44px 0 36px;
+    gap: 20px;
+    padding: 36px 0;
   }
   .profile-initial {
     font-size: 42px;
     letter-spacing: -0.04em;
   }
   .profile-avatar {
-    align-self: start;
-    margin-top: 4px;
+    width: 80px;
   }
   .about-section {
     grid-template-columns: minmax(0, 1fr);
