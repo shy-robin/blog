@@ -49,12 +49,11 @@ export function playNavigationSound() {
       source.onended = () => source.disconnect();
       source.start();
     };
-    if (audio.state === "running") play();
-    else
-      void audio
-        .resume()
-        .then(play)
-        .catch(() => {});
+    // Keep both resume() and start() in the original tap gesture. Starting a
+    // source while suspended queues it until the context resumes; awaiting the
+    // promise first can lose gesture-based permission in mobile browsers.
+    if (audio.state !== "running") void audio.resume().catch(() => {});
+    play();
   } catch {
     // Audio is optional; unsupported or blocked playback never blocks navigation.
   }
