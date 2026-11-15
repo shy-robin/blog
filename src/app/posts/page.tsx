@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PostList } from "@/components/post-list";
+import { PostSearch } from "@/components/post-search";
 import { getPostsPage } from "@/sanity/posts";
 import { getTagCounts, postsUrl, searchValue } from "@/lib/post-search";
 import { redirect } from "next/navigation";
@@ -73,27 +74,7 @@ export default async function PostsPage({ searchParams }: Props) {
         </h1>
       </section>
       <section className="post-discovery" aria-label="查找文章">
-        <form
-          action="/posts"
-          method="get"
-          className="post-search"
-          role="search"
-        >
-          <label htmlFor="post-query" className="sr-only">
-            搜索文章标题、摘要或标签
-          </label>
-          <input
-            key={`${query}:${tag}`}
-            id="post-query"
-            name="q"
-            type="search"
-            defaultValue={query}
-            placeholder="搜索标题、摘要或标签"
-            maxLength={120}
-          />
-          {tag && <input type="hidden" name="tag" value={tag} />}
-          <button type="submit">搜索</button>
-        </form>
+        <PostSearch query={query} tag={tag} />
         <nav className="tag-filters" aria-label="按标签筛选文章">
           <Link href={postsUrl(query)} aria-current={!tag ? "page" : undefined}>
             全部 <span>{total}</span>
