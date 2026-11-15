@@ -21,7 +21,7 @@ export function filterPosts(posts: Post[], query: string, tag: string) {
   });
 }
 
-export function getTagCounts(posts: Post[]) {
+export function getTagCounts(posts: Pick<Post, "tags">[]) {
   const counts = new Map<string, number>();
   for (const post of posts) {
     for (const tag of new Set(post.tags || [])) {
@@ -33,10 +33,11 @@ export function getTagCounts(posts: Post[]) {
   );
 }
 
-export function postsUrl(query = "", tag = "") {
+export function postsUrl(query = "", tag = "", page = 1) {
   const params = new URLSearchParams();
   if (query) params.set("q", query);
   if (tag) params.set("tag", tag);
+  if (page > 1) params.set("page", String(page));
   const suffix = params.toString();
   return suffix ? `/posts?${suffix}` : "/posts";
 }

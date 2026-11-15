@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PostList } from "@/components/post-list";
-import { getPosts } from "@/sanity/posts";
-import {
-  filterPosts,
-  getTagCounts,
-  postsUrl,
-  searchValue,
-} from "@/lib/post-search";
+import { getPostsPage } from "@/sanity/posts";
+import { getTagCounts, postsUrl, searchValue } from "@/lib/post-search";
+import { redirect } from "next/navigation";
+import { POSTS_PER_PAGE, pageNumbers, pageValue } from "@/lib/post-pagination";
 import { site, absoluteUrl } from "@/lib/site";
 type Props = {
-  searchParams: Promise<{ q?: string | string[]; tag?: string | string[] }>;
+  searchParams: Promise<{
+    q?: string | string[];
+    tag?: string | string[];
+    page?: string | string[];
+  }>;
 };
 
 export async function generateMetadata({
@@ -18,13 +19,15 @@ export async function generateMetadata({
 }: Props): Promise<Metadata> {
   const params = await searchParams;
   const filtered = Boolean(searchValue(params.q) || searchValue(params.tag));
-  const title = "文章";
+  const page = pageValue(params.page);
+  const canonical = absoluteUrl(postsUrl("", "", page));
+  const title = page > 1 ? `文章 · 第 ${page} 页` : "文章";
   const description = "Web 前端开发的工程实践、技术方案与问题复盘。";
   return {
     title,
     description,
     alternates: {
-      canonical: absoluteUrl("/posts"),
+      canonical,
       types: { "application/rss+xml": absoluteUrl("/feed.xml") },
     },
     robots: filtered
@@ -34,7 +37,7 @@ export async function generateMetadata({
       type: "website",
       title: `${title} | ${site.name}`,
       description,
-      url: absoluteUrl("/posts"),
+      url: canonical,
       siteName: site.name,
       locale: "zh_CN",
       images: [absoluteUrl("/og")],
@@ -49,17 +52,24 @@ export async function generateMetadata({
 }
 
 export default async function PostsPage({ searchParams }: Props) {
-  const [posts, params] = await Promise.all([getPosts(), searchParams]);
+  const params = await searchParams;
   const query = searchValue(params.q);
   const tag = searchValue(params.tag);
-  const filtered = filterPosts(posts, query, tag);
-  const tags = getTagCounts(posts);
+  const page = pageValue(params.page);
+  const { posts, total, matched, tagSets } = await getPostsPage(
+    query,
+    tag,
+    page,
+  );
+  const pages = Math.max(1, Math.ceil(matched / POSTS_PER_PAGE));
+  if (page > pages) redirect(postsUrl(query, tag, pages));
+  const tags = getTagCounts(tagSets);
   const hasFilters = Boolean(query || tag);
   return (
     <>
       <section className="page-intro">
         <h1>
-          文章<span className="article-count">{posts.length}</span>
+          文章<span className="article-count">{total}</span>
         </h1>
         <p>从具体问题出发，记录分析过程与实践经验。</p>
       </section>
@@ -87,7 +97,7 @@ export default async function PostsPage({ searchParams }: Props) {
         </form>
         <nav className="tag-filters" aria-label="按标签筛选文章">
           <Link href={postsUrl(query)} aria-current={!tag ? "page" : undefined}>
-            全部 <span>{posts.length}</span>
+            全部 <span>{total}</span>
           </Link>
           {tags.map((item) => (
             <Link
@@ -102,14 +112,14 @@ export default async function PostsPage({ searchParams }: Props) {
         {hasFilters && (
           <div className="search-summary">
             <p>
-              找到 {filtered.length} 篇文章{query && <> · 关键词「{query}」</>}
+              找到 {matched} 篇文章{query && <> · 关键词「{query}」</>}
               {tag && <> · 标签「{tag}」</>}
             </p>
             <Link href="/posts">清除筛选</Link>
           </div>
         )}
       </section>
-      {hasFilters && !filtered.length ? (
+      {hasFilters && !matched ? (
         <section className="empty-state">
           <h2>没有找到匹配的文章</h2>
           <p>试试更短的关键词，或清除标签筛选。</p>
@@ -118,7 +128,60 @@ export default async function PostsPage({ searchParams }: Props) {
           </Link>
         </section>
       ) : (
-        <PostList posts={filtered} />
+        <PostList posts={posts} />
+      )}
+      {matched > 0 && (
+        <div className="pagination-section">
+          <p className="pagination-summary">
+            共 {matched} 篇 · 第 {(page - 1) * POSTS_PER_PAGE + 1}–
+            {Math.min(page * POSTS_PER_PAGE, matched)} 篇
+          </p>
+          {pages > 1 && (
+            <nav className="pagination" aria-label="文章分页">
+              {page > 1 ? (
+                <Link
+                  prefetch={false}
+                  href={postsUrl(query, tag, page - 1)}
+                  rel="prev"
+                >
+                  上一页
+                </Link>
+              ) : (
+                <span aria-disabled="true">上一页</span>
+              )}
+              <div className="pagination-numbers">
+                {pageNumbers(page, pages).map((number, index, numbers) => (
+                  <span className="pagination-item" key={number}>
+                    {index > 0 && number - numbers[index - 1] > 1 && (
+                      <span className="pagination-ellipsis" aria-hidden="true">
+                        …
+                      </span>
+                    )}
+                    <Link
+                      prefetch={false}
+                      href={postsUrl(query, tag, number)}
+                      aria-label={`第 ${number} 页`}
+                      aria-current={number === page ? "page" : undefined}
+                    >
+                      {number}
+                    </Link>
+                  </span>
+                ))}
+              </div>
+              {page < pages ? (
+                <Link
+                  prefetch={false}
+                  href={postsUrl(query, tag, page + 1)}
+                  rel="next"
+                >
+                  下一页
+                </Link>
+              ) : (
+                <span aria-disabled="true">下一页</span>
+              )}
+            </nav>
+          )}
+        </div>
       )}
     </>
   );

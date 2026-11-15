@@ -2,6 +2,7 @@ import "server-only";
 import { cache } from "react";
 import { client } from "./client";
 import type { PortableTextBlock } from "@portabletext/types";
+import { postPageQueries } from "@/lib/post-pagination";
 
 export type PostImage = {
   _type: "image";
@@ -29,6 +30,20 @@ export type Post = {
 };
 const options = { next: { revalidate: 60, tags: ["posts"] } };
 const fields = `_id,title,"slug":slug.current,excerpt,publishedAt,"updatedAt":_updatedAt,tags,coverImage`;
+export const getPostsPage = cache(
+  async (query: string, tag: string, page: number) => {
+    const queries = postPageQueries(query, tag, page);
+    const [stats, posts] = await Promise.all([
+      client.fetch<{
+        total: number;
+        matched: number;
+        tagSets: { tags?: string[] }[];
+      }>(queries.stats, queries.params, options),
+      client.fetch<Post[]>(queries.items, queries.params, options),
+    ]);
+    return { ...stats, posts };
+  },
+);
 export const getPosts = cache(
   async (): Promise<Post[]> =>
     client.fetch(

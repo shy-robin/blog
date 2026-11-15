@@ -921,6 +921,50 @@ summary:focus-visible,
   padding-bottom: 24px;
   border-bottom: 1px solid var(--line);
 }
+.pagination-section {
+  margin-top: 32px;
+}
+.pagination-summary {
+  color: var(--muted);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 16px;
+  font-size: 13px;
+}
+.pagination a,
+.pagination > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding-inline: 8px;
+  border-radius: 6px;
+}
+.pagination [aria-current="page"] {
+  color: var(--accent);
+  background: var(--surface);
+  font-weight: 600;
+}
+.pagination [aria-disabled="true"] {
+  color: var(--muted);
+}
+.pagination-numbers,
+.pagination-item {
+  display: flex;
+  align-items: center;
+}
+.pagination-ellipsis {
+  padding-inline: 2px;
+  color: var(--muted);
+}
 .posts-loading {
   padding-top: 44px;
   min-height: 65vh;
@@ -1059,6 +1103,14 @@ summary:focus-visible,
   }
 }
 @media (max-width: 520px) {
+  .pagination {
+    flex-wrap: wrap;
+  }
+  .pagination-numbers {
+    order: 1;
+    flex-basis: 100%;
+    justify-content: center;
+  }
   .about-intro {
     grid-template-columns: minmax(0, 1fr) 80px;
     gap: 16px;
