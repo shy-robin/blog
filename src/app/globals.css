@@ -921,6 +921,35 @@ summary:focus-visible,
   padding-bottom: 24px;
   border-bottom: 1px solid var(--line);
 }
+.posts-loading {
+  padding-top: 44px;
+  min-height: 65vh;
+}
+.posts-loading > p {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+.loading-post {
+  padding: 30px 0;
+  border-bottom: 1px solid var(--line);
+}
+.loading-line {
+  display: block;
+  height: 14px;
+  width: 90%;
+  margin-block: 12px;
+  border-radius: 4px;
+  background: var(--surface);
+}
+.loading-date {
+  width: 24%;
+  height: 11px;
+}
+.loading-title {
+  width: 65%;
+  height: 22px;
+}
 .post-search {
   display: flex;
   gap: 12px;

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SanityImage } from "@/components/sanity-image";
 import { notFound } from "next/navigation";
-import { BlogShell } from "@/components/blog-shell";
 import { ArticleBody } from "@/components/article-body";
 import { getPost, getPosts, getHeadings, formatDate } from "@/sanity/posts";
 import { imageUrl, imageDimensions } from "@/sanity/images";
@@ -27,7 +26,7 @@ export default async function PostPage({ params }: Props) {
   const headings = getHeadings(post.body);
   const cover = imageUrl(post.coverImage);
   return (
-    <BlogShell active="posts">
+    <>
       <article className="article">
         <header className="article-header">
           <Link className="back-link" href="/posts">
@@ -91,6 +90,6 @@ export default async function PostPage({ params }: Props) {
         </div>
         <Comments postId={post._id} />
       </article>
-    </BlogShell>
+    </>
   );
 }

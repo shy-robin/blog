@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { BlogShell } from "@/components/blog-shell";
 import { PostList } from "@/components/post-list";
 import { getPosts } from "@/sanity/posts";
 import {
@@ -57,7 +56,7 @@ export default async function PostsPage({ searchParams }: Props) {
   const tags = getTagCounts(posts);
   const hasFilters = Boolean(query || tag);
   return (
-    <BlogShell active="posts">
+    <>
       <section className="page-intro">
         <h1>
           文章<span className="article-count">{posts.length}</span>
@@ -121,6 +120,6 @@ export default async function PostsPage({ searchParams }: Props) {
       ) : (
         <PostList posts={filtered} />
       )}
-    </BlogShell>
+    </>
   );
 }

@@ -69,6 +69,7 @@ export function BottomNav({
           <Link
             key={item.key}
             href={item.href}
+            prefetch={item.key === "posts" ? true : undefined}
             aria-label={item.label}
             aria-current={active === item.key ? "page" : undefined}
           >

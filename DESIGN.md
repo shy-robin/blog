@@ -28,6 +28,8 @@ Reading refinements retain the narrow frame and existing content. List excerpts 
 
 ## Interaction
 
+Writing routes share their shell through the posts layout. A route loading boundary shows a static, accessible article placeholder while server content is pending; it does not animate or block navigation. The dock prefetches the writing index and its data in production so the primary destination can be ready before a tap. Network delays can still occur on cold or uncached requests.
+
 44px minimum navigation and theme targets, visible keyboard outline, native links and preserved skip link. Light/dark follows system preference until explicitly chosen; persist explicit choice when storage is available. Apply theme before paint. With storage blocked, switching still works in memory. Respect reduced motion.
 
 The bottom navigation is a compact 54px-high capsule with 44×44px targets. Three regions are separated by two 1px vertical rules: the author's 28px avatar linking to `/about`, the two page links (writing, projects), and display settings (theme switch). Use the real Sanity profile avatar without a background or decorative ring; missing or failed images fall back to the author's initial without inventing a portrait. The about page marks the avatar destination, not a duplicate page icon.
