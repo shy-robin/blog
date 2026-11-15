@@ -60,7 +60,9 @@ export function safeExternalUrl(value?: string) {
 
 export function contactEmailUrl(email?: string) {
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return undefined;
-  return `mailto:${encodeURIComponent(email)}`;
+  // Preserve the address separator for native mail handlers; escape query and
+  // fragment delimiters so an address cannot inject extra mail headers.
+  return `mailto:${encodeURIComponent(email).replace(/%40/g, "@")}`;
 }
 
 export function qqContactUrls(value?: string) {

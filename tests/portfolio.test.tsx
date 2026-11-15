@@ -35,11 +35,15 @@ test("external links reject script schemes and embedded credentials", () => {
   );
   assert.equal(
     contactEmailUrl("hello@example.com"),
-    "mailto:hello%40example.com",
+    "mailto:hello@example.com",
   );
   assert.equal(
     contactEmailUrl("hello@example.com\r\nBcc:test@example.com"),
     undefined,
+  );
+  assert.equal(
+    contactEmailUrl("hello?subject=test@example.com"),
+    "mailto:hello%3Fsubject%3Dtest@example.com",
   );
   assert.deepEqual(
     projectLinks({

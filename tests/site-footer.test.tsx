@@ -32,7 +32,7 @@ test("footer uses supplied contacts and existing destinations without invented p
     "/about",
     "/feed.xml",
     "https://github.com/example",
-    "mailto:hello%40example.com",
+    "mailto:hello@example.com",
   ]) {
     assert.ok(html.includes(`href="${href}"`));
   }
