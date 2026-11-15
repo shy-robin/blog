@@ -44,6 +44,27 @@ export const schemaTypes = [
         initialValue: () => new Date().toISOString(),
       }),
       defineField({
+        name: "legacySource",
+        title: "旧博客原始信息",
+        type: "object",
+        readOnly: true,
+        options: { collapsible: true, collapsed: true },
+        fields: [
+          defineField({ name: "url", title: "原文地址", type: "url" }),
+          defineField({ name: "path", title: "原文路径", type: "string" }),
+          defineField({
+            name: "publishedAt",
+            title: "原始发布时间",
+            type: "datetime",
+          }),
+          defineField({
+            name: "updatedAt",
+            title: "原始更新时间",
+            type: "datetime",
+          }),
+        ],
+      }),
+      defineField({
         name: "body",
         title: "正文",
         type: "array",
