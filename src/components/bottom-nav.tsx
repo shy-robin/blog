@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { DockIcon, type DockIconName } from "./dock-icon";
 import { ThemeToggle } from "./theme-toggle";
+import { playNavigationSound } from "@/lib/navigation-sound";
 
 export type NavPage = "posts" | "projects" | "about";
 const destinations: {
@@ -52,6 +53,9 @@ export function BottomNav({
           href="/about"
           aria-label={`关于 ${name}`}
           aria-current={active === "about" ? "page" : undefined}
+          onNavigate={() => {
+            if (active !== "about") playNavigationSound();
+          }}
         >
           <DockAvatar
             key={avatarUrl || "initial"}
@@ -72,6 +76,9 @@ export function BottomNav({
             prefetch={item.key === "posts" ? true : undefined}
             aria-label={item.label}
             aria-current={active === item.key ? "page" : undefined}
+            onNavigate={() => {
+              if (active !== item.key) playNavigationSound();
+            }}
           >
             <DockIcon name={item.icon} />
             <span className="dock-label" aria-hidden="true">

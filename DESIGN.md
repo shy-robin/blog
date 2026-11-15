@@ -28,6 +28,8 @@ Reading refinements retain the narrow frame and existing content. List excerpts 
 
 ## Interaction
 
+Switching dock destinations plays a quiet 50ms synthesized tick after a user navigation gesture. There is no audio download or autoplay. Re-selecting the current destination, hovering, opening a modified link, and theme changes stay silent. Unsupported or blocked audio never interrupts navigation.
+
 Writing routes share their shell through the posts layout. A route loading boundary shows a static, accessible article placeholder while server content is pending; it does not animate or block navigation. The dock prefetches the writing index and its data in production so the primary destination can be ready before a tap. Network delays can still occur on cold or uncached requests.
 
 The writing index fetches 12 articles per page from Sanity. Search and tag filters run before the server-side slice; counts and tag metadata are fetched separately from article records. Page links preserve search and tags, while changing either filter resets to page one. The first page omits `page=1`; out-of-range pages redirect to the last available page. Each unfiltered page has its own canonical URL. On mobile, previous/next links sit above the compact page-number row with 44px targets. Pagination links do not prefetch other pages automatically.
