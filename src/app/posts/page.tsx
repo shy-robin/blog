@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PostList } from "@/components/post-list";
+import { PostTagFilters } from "@/components/post-tag-filters";
 import { PostSearch } from "@/components/post-search";
 import { getPostsPage } from "@/sanity/posts";
 import { getTagCounts, postsUrl, searchValue } from "@/lib/post-search";
@@ -75,20 +76,7 @@ export default async function PostsPage({ searchParams }: Props) {
       </section>
       <section className="post-discovery" aria-label="查找文章">
         <PostSearch query={query} tag={tag} />
-        <nav className="tag-filters" aria-label="按标签筛选文章">
-          <Link href={postsUrl(query)} aria-current={!tag ? "page" : undefined}>
-            全部 <span>{total}</span>
-          </Link>
-          {tags.map((item) => (
-            <Link
-              key={item.name}
-              href={postsUrl(query, item.name)}
-              aria-current={tag === item.name ? "page" : undefined}
-            >
-              {item.name} <span>{item.count}</span>
-            </Link>
-          ))}
-        </nav>
+        <PostTagFilters tags={tags} total={total} query={query} tag={tag} />
         {hasFilters && (
           <div className="search-summary">
             <p>
