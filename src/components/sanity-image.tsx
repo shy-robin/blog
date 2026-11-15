@@ -1,14 +1,7 @@
 "use client";
 
-import Image, { type ImageLoaderProps } from "next/image";
+import Image from "next/image";
 import { useState } from "react";
-
-function sanityLoader({ src, width, quality }: ImageLoaderProps) {
-  const url = new URL(src);
-  url.searchParams.set("w", String(width));
-  url.searchParams.set("q", String(quality || 80));
-  return url.toString();
-}
 
 export function SanityImage({
   src,
@@ -39,7 +32,6 @@ export function SanityImage({
     );
   return (
     <Image
-      loader={sanityLoader}
       src={src}
       alt={alt}
       width={width}
