@@ -24,7 +24,6 @@ export default async function ProjectsPage() {
         <h1>
           项目<span className="article-count">{projects.length}</span>
         </h1>
-        <p>把思考变成可以使用的东西，记录实现过程中的选择与收获。</p>
       </section>
       {projects.length ? (
         <div className="project-list">

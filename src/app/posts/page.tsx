@@ -71,7 +71,6 @@ export default async function PostsPage({ searchParams }: Props) {
         <h1>
           文章<span className="article-count">{total}</span>
         </h1>
-        <p>从具体问题出发，记录分析过程与实践经验。</p>
       </section>
       <section className="post-discovery" aria-label="查找文章">
         <form

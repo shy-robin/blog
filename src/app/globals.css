@@ -484,26 +484,23 @@ summary:focus-visible,
   }
 }
 .page-intro {
-  padding: 44px 0 32px;
+  padding: 36px 0 24px;
 }
 .page-intro h1 {
-  font-size: 30px;
-  font-weight: 600;
-  margin: 0 0 16px;
-  letter-spacing: -0.03em;
-  line-height: 1.4;
-}
-.page-intro > p:last-child {
-  color: var(--muted);
-  line-height: 1.8;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0;
+  letter-spacing: 0;
+  line-height: 1.5;
 }
 .article-count {
   font:
-    14px var(--font-geist-mono),
+    12px var(--font-geist-mono),
     monospace;
-  margin-left: 18px;
   color: var(--muted);
-  vertical-align: super;
 }
 .article-header {
   max-width: 800px;
