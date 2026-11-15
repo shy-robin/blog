@@ -6,6 +6,7 @@ import {
   projectLinks,
   safeExternalUrl,
   contactEmailUrl,
+  qqContactUrls,
   contentCacheTag,
 } from "../src/lib/portfolio";
 import { ProjectCard } from "../src/components/project-card";
@@ -13,7 +14,9 @@ import { ProjectCard } from "../src/components/project-card";
 test("an empty profile uses known public identity without inventing career or contact data", () => {
   const profile = displayProfile(null);
   assert.equal(profile.name, "ShyRobin");
-  assert.equal(profile.githubUrl, "https://github.com/shy-robin");
+  assert.equal(profile.githubUrl, undefined);
+  assert.equal(profile.qq, undefined);
+  assert.equal(profile.wechat, undefined);
   assert.equal(profile.email, undefined);
   assert.deepEqual(profile.experiences, []);
   assert.deepEqual(profile.interests, []);
@@ -41,9 +44,9 @@ test("external links reject script schemes and embedded credentials", () => {
   assert.deepEqual(
     projectLinks({
       demoUrl: "javascript:alert(1)",
-      sourceUrl: "https://github.com/shy-robin/blog",
+      sourceUrl: "https://github.com/example/blog",
     }),
-    [{ label: "源码", href: "https://github.com/shy-robin/blog" }],
+    [{ label: "源码", href: "https://github.com/example/blog" }],
   );
 });
 test("project cards show provided contributions, escape content and omit absent links", () => {
@@ -71,4 +74,14 @@ test("publishing routes invalidate their own caches and preserve article behavio
   assert.equal(contentCacheTag("profile"), "profile");
   assert.equal(contentCacheTag("unknown"), null);
   assert.equal(contentCacheTag(undefined), null);
+});
+
+test("QQ contact links are generated only from validated Sanity account values", () => {
+  const links = qqContactUrls("123456789");
+  assert.ok(links?.web.startsWith("https://wpa.qq.com/"));
+  assert.ok(links?.mobile.startsWith("mqqwpa://im/chat?"));
+  assert.ok(links?.desktop.startsWith("tencent://message/"));
+  assert.equal(qqContactUrls("javascript:alert(1)"), undefined);
+  assert.equal(qqContactUrls("123&redirect=evil"), undefined);
+  assert.equal(qqContactUrls(undefined), undefined);
 });

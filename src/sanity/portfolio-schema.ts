@@ -48,7 +48,6 @@ export const portfolioSchemaTypes = [
         name: "githubUrl",
         title: "GitHub 地址",
         type: "url",
-        initialValue: "https://github.com/shy-robin",
         validation: urlValidation,
       }),
       defineField({
@@ -57,6 +56,29 @@ export const portfolioSchemaTypes = [
         description: "填写后会公开显示在关于页，不会自动使用 Git 提交邮箱。",
         type: "string",
         validation: (rule) => rule.email(),
+      }),
+      defineField({
+        name: "qq",
+        title: "公开 QQ 号（可选）",
+        type: "string",
+        description:
+          "点击页脚 QQ 入口尝试唤起 QQ，需要访客安装应用并允许跳转。",
+        validation: (rule) => rule.regex(/^[1-9]\d{4,11}$/, { name: "QQ 号" }),
+      }),
+      defineField({
+        name: "wechat",
+        title: "公开微信号（可选）",
+        type: "string",
+        description: "仅保存联系方式；页脚通过下方好友二维码展示微信入口。",
+        validation: (rule) => rule.max(64),
+      }),
+      defineField({
+        name: "wechatQrCode",
+        title: "微信好友二维码（可选）",
+        description:
+          "上传微信个人二维码名片，页脚点击 WeChat 后展示。请保留完整二维码和四周白边。",
+        type: "image",
+        fields: imageFields,
       }),
       defineField({
         name: "interests",

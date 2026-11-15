@@ -2,6 +2,7 @@ import { BottomNav, type NavPage } from "./bottom-nav";
 import { getProfile } from "@/sanity/portfolio";
 import { displayProfile } from "@/lib/portfolio";
 import { imageUrl } from "@/sanity/images";
+import { SiteFooter } from "./site-footer";
 
 export async function BlogShell({
   children,
@@ -21,6 +22,7 @@ export async function BlogShell({
       <main id="main" tabIndex={-1}>
         {children}
       </main>
+      <SiteFooter profile={profile} />
       <BottomNav active={active} avatarUrl={avatarUrl} name={profile.name} />
     </div>
   );

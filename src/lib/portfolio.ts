@@ -15,6 +15,9 @@ export type Profile = {
   location?: string;
   githubUrl?: string;
   email?: string;
+  qq?: string;
+  wechat?: string;
+  wechatQrCode?: PostImage;
   interests?: string[];
   experiences?: Experience[];
 };
@@ -35,7 +38,7 @@ export function displayProfile(profile: Profile | null) {
     ...profile,
     name: profile?.name?.trim() || "ShyRobin",
     intro: profile?.intro?.trim() || "记录 Web 前端开发的实践与思考。",
-    githubUrl: profile ? profile.githubUrl : "https://github.com/shy-robin",
+    githubUrl: profile?.githubUrl,
     interests: profile?.interests || [],
     experiences: profile?.experiences || [],
   };
@@ -58,6 +61,16 @@ export function safeExternalUrl(value?: string) {
 export function contactEmailUrl(email?: string) {
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return undefined;
   return `mailto:${encodeURIComponent(email)}`;
+}
+
+export function qqContactUrls(value?: string) {
+  const account = value?.trim();
+  if (!account || !/^[1-9]\d{4,11}$/.test(account)) return undefined;
+  return {
+    web: `https://wpa.qq.com/msgrd?v=3&uin=${account}&site=qq&menu=yes`,
+    mobile: `mqqwpa://im/chat?chat_type=wpa&uin=${account}&version=1&src_type=web`,
+    desktop: `tencent://message/?uin=${account}&Site=&Menu=yes`,
+  };
 }
 
 export function projectLinks(project: Pick<Project, "demoUrl" | "sourceUrl">) {

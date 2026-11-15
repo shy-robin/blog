@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { BlogShell } from "@/components/blog-shell";
 import { ProjectCard } from "@/components/project-card";
-import { getProjects } from "@/sanity/portfolio";
+import { getProfile, getProjects } from "@/sanity/portfolio";
+import { safeExternalUrl } from "@/lib/portfolio";
 import { getPageMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
@@ -12,7 +13,11 @@ export const metadata = getPageMetadata(
 );
 
 export default async function ProjectsPage() {
-  const projects = await getProjects();
+  const [projects, profile] = await Promise.all([
+    getProjects(),
+    getProfile().catch(() => null),
+  ]);
+  const github = safeExternalUrl(profile?.githubUrl);
   return (
     <BlogShell active="projects">
       <section className="page-intro">
@@ -31,14 +36,16 @@ export default async function ProjectsPage() {
         <section className="empty-state portfolio-empty">
           <h2>项目正在整理中</h2>
           <p>项目介绍与实践记录会陆续放在这里。</p>
-          <a
-            className="text-link"
-            href="https://github.com/shy-robin"
-            target="_blank"
-            rel="noreferrer"
-          >
-            先看看 GitHub ↗
-          </a>
+          {github && (
+            <a
+              className="text-link"
+              href={github}
+              target="_blank"
+              rel="noreferrer"
+            >
+              先看看 GitHub ↗
+            </a>
+          )}
         </section>
       )}
       <div className="portfolio-bottom">

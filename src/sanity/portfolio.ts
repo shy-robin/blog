@@ -6,7 +6,11 @@ import type { Profile, Project } from "@/lib/portfolio";
 export const getProfile = cache(
   async (): Promise<Profile | null> =>
     client.fetch(
-      `*[_type == "profile" && _id == "profile"][0]{name,intro,bio,avatar,location,githubUrl,email,interests,experiences}`,
+      `*[_type == "profile" && _id == "profile"][0]{
+        name,intro,bio,avatar,location,
+        githubUrl,email,qq,wechat,wechatQrCode,
+        interests,experiences
+      }`,
       {},
       { next: { revalidate: 60, tags: ["profile"] } },
     ),

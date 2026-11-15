@@ -10,7 +10,9 @@ No fabricated shelves, music collection, biography, portraits or project counts.
 
 The about page pairs a naturally wrapping greeting with a 112px transparent avatar, reduced to 80px and top-aligned on phones. Avatar images use contain rather than cropping; missing or failed images show a transparent initial instead of a clipped error card. Desktop sections share a 112px label column and 24px gutter; phones stack headings above content. Reading, project, subscription and contact links use the shared arrow style and at least 44px touch targets.
 
-Pages have no shared footer information block; RSS subscription lives on the about page. The dock sits 12px above the bottom safe area. Content reserves 96px plus the bottom safe area so the final links and pagination can scroll clear of the dock without excessive trailing space.
+A reference-inspired two-column directory footer follows the page content with supplied contact links and existing site destinations. Links use fine tree branches and 44px targets. Copyright, clock, timezone and location are omitted. Missing contact data is omitted; no social accounts are invented. The dock sits 12px above the bottom safe area. Content reserves 96px plus the bottom safe area so the final footer links can scroll clear of the dock.
+
+The contact column reads all personal contacts from the Sanity profile. GitHub and email link directly; QQ attempts an app deep link appropriate to mobile or desktop, with a web contact URL as the initial fallback. WeChat opens a native dialog with the uploaded friend QR image, keyboard dismissal and an explicit close button. No account-copy controls remain. If no QR image is supplied, the WeChat entry is omitted. QR images are Sanity assets served through the blog image optimizer, never committed to the repository.
 
 ## Tokens
 
