@@ -41,7 +41,7 @@ export function playNavigationSound() {
           peak = Math.max(peak, Math.abs(samples[i]));
         }
         for (let i = 0; i < samples.length; i++)
-          samples[i] *= 0.055 / (peak || 1);
+          samples[i] *= 0.22 / (peak || 1);
       }
       const source = audio.createBufferSource();
       source.buffer = woodClick;

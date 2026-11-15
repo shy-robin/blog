@@ -34,7 +34,7 @@ Reading refinements retain the narrow frame and existing content. List excerpts 
 
 ## Interaction
 
-Switching dock destinations plays a quiet 70ms wooden tap after a user navigation gesture. A filtered strike and quickly damped resonances replace the electronic pitch sweep; the locally generated buffer is reused between taps. There is no audio download or autoplay. Re-selecting the current destination, hovering, opening a modified link, and theme changes stay silent. Unsupported or blocked audio never interrupts navigation.
+Switching dock destinations plays a short 70ms wooden tap after a user navigation gesture. Its normalized peak amplitude is 0.22 so it remains audible on phone speakers at ordinary media volume. A filtered strike and quickly damped resonances replace the electronic pitch sweep; the locally generated buffer is reused between taps. There is no audio download or autoplay. Re-selecting the current destination, hovering, opening a modified link, and theme changes stay silent. Unsupported or blocked audio never interrupts navigation.
 
 Audio context resumption and source start both run synchronously inside the navigation gesture, rather than starting playback in a resume-promise callback. Suspended contexts queue the short source until resumption so stricter mobile gesture handling can recognize the tap.
 
