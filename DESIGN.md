@@ -10,6 +10,8 @@ No fabricated shelves, music collection, biography, portraits or project counts.
 
 The about page pairs a naturally wrapping greeting with a 112px transparent avatar, reduced to 80px and top-aligned on phones. Avatar images use contain rather than cropping; missing or failed images show a transparent initial instead of a clipped error card. Desktop sections share a 112px label column and 24px gutter; phones stack headings above content. Reading, project, subscription and contact links use the shared arrow style and at least 44px touch targets.
 
+Pages have no shared footer information block; RSS subscription lives on the about page. The dock sits 12px above the bottom safe area. Content reserves 96px plus the bottom safe area so the final links and pagination can scroll clear of the dock without excessive trailing space.
+
 ## Tokens
 
 User-selected palette: One Light for light mode, One Dark for dark mode. Layout and typography continue to follow the cali.so reference.
