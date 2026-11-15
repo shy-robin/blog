@@ -1,6 +1,6 @@
 # 搜索引擎与订阅
 
-正式站点地址默认是 `https://blog-tau-coral-10.vercel.app`，配置集中在 `src/lib/site.ts`。之后绑定自定义域名时，设置 `NEXT_PUBLIC_SITE_URL=https://你的域名` 并重新部署，站点地图、RSS 和 canonical 链接都会使用新域名。不要将临时部署地址或 `VERCEL_URL` 用作正式域名。
+正式站点地址默认是 `https://www.shyrobin.top`，配置集中在 `src/lib/site.ts`。`shyrobin.top` 在 Vercel 中跳转至带 `www` 的正式地址。若部署平台配置了 `NEXT_PUBLIC_SITE_URL`，它会覆盖代码默认值，请将 Production 环境中的值同步为 `https://www.shyrobin.top` 并重新部署，站点地图、RSS 和 canonical 链接都会使用新域名。不要将临时部署地址或 `VERCEL_URL` 用作正式域名。
 
 ## 公开入口
 

@@ -5,7 +5,7 @@
 - Project ID: `e4fd09lc`
 - Dataset: `production`
 - 在 Sanity 管理平台的 API → CORS origins 中允许 `http://localhost:3000`，并启用 Allow credentials。
-- 正式上线后添加实际网站 origin（例如 `https://example.com`），不要添加路径。
+- 正式网站需在 CORS origins 中添加 `https://www.shyrobin.top`，并启用 Allow credentials，供 `/studio` 使用；不要添加路径。保留本地开发的 origin。此项需在 Sanity 管理平台配置，修改代码不会自动同步远程 CORS 设置。
 - 可通过 `NEXT_PUBLIC_SANITY_PROJECT_ID` 和 `NEXT_PUBLIC_SANITY_DATASET` 环境变量覆盖默认值。这两个值不是密钥。
 - 不需要向浏览器提供写入 Token；Studio 使用登录用户的权限。不要把服务端 Token 放入 NEXT_PUBLIC 环境变量。
 

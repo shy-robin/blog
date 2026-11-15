@@ -18,7 +18,7 @@ export const site = {
   description:
     "ShyRobin 的个人博客，记录 Web 前端工程实践、技术方案与生活思考。",
   url: resolveSiteUrl(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://blog-tau-coral-10.vercel.app",
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.shyrobin.top",
   ),
 };
 
