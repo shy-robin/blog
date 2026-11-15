@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, type CSSProperties } from "react";
+import { useState } from "react";
 import { DockIcon, type DockIconName } from "./dock-icon";
 import { ThemeToggle } from "./theme-toggle";
 
@@ -46,9 +46,6 @@ export function BottomNav({
   avatarUrl?: string | null;
   name?: string;
 }) {
-  const [preview, setPreview] = useState<number | null>(null);
-  const current = destinations.findIndex((item) => item.key === active);
-  const index = preview ?? current;
   return (
     <nav className="site-dock" aria-label="主导航">
       <div className="dock-profile">
@@ -68,31 +65,13 @@ export function BottomNav({
         </Link>
       </div>
       <span className="dock-separator" aria-hidden="true" />
-      <div
-        className="dock-links"
-        role="group"
-        aria-label="页面导航"
-        style={{ "--dock-index": Math.max(0, index) } as CSSProperties}
-        onMouseLeave={() => setPreview(null)}
-        onBlur={(event) => {
-          if (!event.currentTarget.contains(event.relatedTarget))
-            setPreview(null);
-        }}
-      >
-        <span
-          className="dock-indicator"
-          data-visible={index >= 0}
-          aria-hidden="true"
-        />
-        {destinations.map((item, index) => (
+      <div className="dock-links" role="group" aria-label="页面导航">
+        {destinations.map((item) => (
           <Link
             key={item.key}
             href={item.href}
             aria-label={item.label}
             aria-current={active === item.key ? "page" : undefined}
-            onMouseEnter={() => setPreview(index)}
-            onFocus={() => setPreview(index)}
-            onClick={() => setPreview(index)}
           >
             <DockIcon name={item.icon} />
             <span className="dock-label" aria-hidden="true">

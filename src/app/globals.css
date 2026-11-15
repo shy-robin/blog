@@ -392,22 +392,17 @@ summary:focus-visible,
     color 160ms ease-out,
     background-color 160ms ease-out;
 }
-.dock-indicator {
+.dock-links > a[aria-current="page"]::after,
+.dock-profile > a[aria-current="page"]::after {
+  content: "";
   position: absolute;
-  inset: 0 auto 0 0;
-  z-index: -1;
-  width: 44px;
+  bottom: 2px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
-  background: var(--surface);
-  transform: translateX(calc(var(--dock-index) * 48px));
-  opacity: 0;
-  pointer-events: none;
-  transition:
-    transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 160ms ease-out;
-}
-.dock-indicator[data-visible="true"] {
-  opacity: 1;
+  background: var(--accent);
+  transform: translateX(-50%);
 }
 .dock-links > a[aria-current="page"] {
   color: var(--accent);
@@ -421,14 +416,6 @@ summary:focus-visible,
 .theme-toggle:hover,
 .theme-toggle:focus-visible {
   background: var(--surface);
-}
-.dock-profile > a[aria-current="page"],
-.dock-profile > a:hover,
-.dock-profile > a:focus-visible {
-  background: var(--surface);
-}
-.dock-profile > a[aria-current="page"] .dock-avatar {
-  outline-color: var(--accent);
 }
 .dock-profile,
 .dock-theme {
@@ -449,15 +436,10 @@ summary:focus-visible,
   height: 28px;
   overflow: hidden;
   border-radius: 50%;
-  outline: 1px solid var(--line);
-  outline-offset: 2px;
-  background: var(--surface);
   color: var(--foreground);
   font-size: 13px;
   font-weight: 600;
-  transition:
-    transform 200ms cubic-bezier(0.16, 1, 0.3, 1),
-    outline-color 160ms ease-out;
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 .dock-avatar img {
   position: absolute;
@@ -505,11 +487,8 @@ summary:focus-visible,
     transform 200ms cubic-bezier(0.16, 1, 0.3, 1),
     visibility 160ms;
 }
-.dock-profile > a:hover .dock-label,
 .dock-profile > a:focus-visible .dock-label,
-.dock-links > a:hover .dock-label,
 .dock-links > a:focus-visible .dock-label,
-.theme-toggle:hover .dock-label,
 .theme-toggle:focus-visible .dock-label {
   opacity: 1;
   visibility: visible;
@@ -520,9 +499,20 @@ summary:focus-visible,
   right: 0;
   transform: translateY(4px);
 }
-.dock-theme .theme-toggle:hover .dock-label,
 .dock-theme .theme-toggle:focus-visible .dock-label {
   transform: translateY(0);
+}
+@media (hover: hover) and (pointer: fine) {
+  .dock-profile > a:hover .dock-label,
+  .dock-links > a:hover .dock-label,
+  .theme-toggle:hover .dock-label {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+  }
+  .dock-theme .theme-toggle:hover .dock-label {
+    transform: translateY(0);
+  }
 }
 .page-intro {
   padding: 44px 0 32px;
@@ -1285,8 +1275,7 @@ summary:focus-visible,
   .theme-toggle,
   .dock-icon,
   .dock-avatar,
-  .dock-label,
-  .dock-indicator {
+  .dock-label {
     transition: none;
   }
   .dock-links > a .dock-icon,
