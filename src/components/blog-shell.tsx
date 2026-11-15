@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { SiteIcon } from "./site-icon";
 import { BottomNav, type NavPage } from "./bottom-nav";
 import { getProfile } from "@/sanity/portfolio";
@@ -20,14 +19,6 @@ export async function BlogShell({
       <a className="skip-link" href="#main">
         跳到正文
       </a>
-      <header className="site-header">
-        <Link className="brand" href="/posts">
-          ShyRobin<span className="brand-dot">.</span>
-        </Link>
-        <Link className="header-index" href="/posts">
-          文章索引
-        </Link>
-      </header>
       <main id="main" tabIndex={-1}>
         {children}
       </main>
