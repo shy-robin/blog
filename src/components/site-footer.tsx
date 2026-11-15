@@ -59,13 +59,13 @@ export function SiteFooter({ profile }: { profile: Profile }) {
         <h2 id="footer-index-heading">索引</h2>
         <ul className="footer-tree">
           <li>
-            <Link href="/posts">写作</Link>
+            <Link href="/posts">文章</Link>
           </li>
           <li>
             <Link href="/projects">项目</Link>
           </li>
           <li>
-            <Link href="/about">关于我</Link>
+            <Link href="/about">关于</Link>
           </li>
           <li>
             <a href="/feed.xml">RSS</a>

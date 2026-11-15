@@ -14,7 +14,7 @@ const destinations: {
   key: NavPage;
   icon: DockIconName;
 }[] = [
-  { href: "/posts", label: "写作", key: "posts", icon: "writing" },
+  { href: "/posts", label: "文章", key: "posts", icon: "writing" },
   { href: "/projects", label: "项目", key: "projects", icon: "projects" },
 ];
 
@@ -51,7 +51,7 @@ export function BottomNav({
       <div className="dock-profile">
         <Link
           href="/about"
-          aria-label={`关于 ${name}`}
+          aria-label="关于"
           aria-current={active === "about" ? "page" : undefined}
           onNavigate={() => {
             if (active !== "about") playNavigationSound();
@@ -63,7 +63,7 @@ export function BottomNav({
             name={name}
           />
           <span className="dock-label" aria-hidden="true">
-            关于我
+            关于
           </span>
         </Link>
       </div>

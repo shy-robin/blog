@@ -68,7 +68,7 @@ export default async function AboutPage() {
       <div className="about-sections">
         {!!paragraphs.length && (
           <section className="about-section">
-            <h2>关于我</h2>
+            <h2>关于</h2>
             <div className="about-copy">
               {paragraphs.map((paragraph, index) => (
                 <p key={index}>{paragraph}</p>
