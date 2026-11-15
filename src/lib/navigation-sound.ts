@@ -1,6 +1,7 @@
 let context: AudioContext | undefined;
+let woodClick: AudioBuffer | undefined;
 
-/** A short, quiet tick, created locally after an explicit navigation gesture. */
+/** A soft wooden tap: a filtered strike and quickly damped resonances. */
 export function playNavigationSound() {
   try {
     const AudioContextClass =
@@ -10,26 +11,43 @@ export function playNavigationSound() {
     if (!AudioContextClass) return;
     if (!context || context.state === "closed") {
       context = new AudioContextClass({ latencyHint: "interactive" });
+      woodClick = undefined;
     }
     const audio = context;
     const play = () => {
-      const oscillator = audio.createOscillator();
-      const gain = audio.createGain();
-      const now = audio.currentTime;
-      oscillator.type = "sine";
-      oscillator.frequency.setValueAtTime(950, now);
-      oscillator.frequency.exponentialRampToValueAtTime(480, now + 0.04);
-      gain.gain.setValueAtTime(0, now);
-      gain.gain.linearRampToValueAtTime(0.045, now + 0.003);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.045);
-      oscillator.connect(gain);
-      gain.connect(audio.destination);
-      oscillator.onended = () => {
-        oscillator.disconnect();
-        gain.disconnect();
-      };
-      oscillator.start(now);
-      oscillator.stop(now + 0.05);
+      if (!woodClick) {
+        woodClick = audio.createBuffer(
+          1,
+          Math.ceil(audio.sampleRate * 0.07),
+          audio.sampleRate,
+        );
+        const samples = woodClick.getChannelData(0);
+        const smoothing =
+          1 - Math.exp((-2 * Math.PI * 1200) / audio.sampleRate);
+        let noise = 0;
+        let peak = 0;
+        for (let i = 0; i < samples.length; i++) {
+          const time = i / audio.sampleRate;
+          noise += smoothing * (Math.random() * 2 - 1 - noise);
+          const strike = noise * 0.7 * Math.exp(-time * 210);
+          const body =
+            Math.sin(2 * Math.PI * 470 * time) * Math.exp(-time * 95) +
+            0.35 * Math.sin(2 * Math.PI * 810 * time) * Math.exp(-time * 135) +
+            0.16 * Math.sin(2 * Math.PI * 1230 * time) * Math.exp(-time * 180);
+          // Round the attack and fade the tail to avoid a sharp digital click.
+          const envelope =
+            Math.min(1, time / 0.0015) * Math.min(1, (0.07 - time) / 0.01);
+          samples[i] = (strike + body) * envelope;
+          peak = Math.max(peak, Math.abs(samples[i]));
+        }
+        for (let i = 0; i < samples.length; i++)
+          samples[i] *= 0.055 / (peak || 1);
+      }
+      const source = audio.createBufferSource();
+      source.buffer = woodClick;
+      source.connect(audio.destination);
+      source.onended = () => source.disconnect();
+      source.start();
     };
     if (audio.state === "running") play();
     else

@@ -28,7 +28,7 @@ Reading refinements retain the narrow frame and existing content. List excerpts 
 
 ## Interaction
 
-Switching dock destinations plays a quiet 50ms synthesized tick after a user navigation gesture. There is no audio download or autoplay. Re-selecting the current destination, hovering, opening a modified link, and theme changes stay silent. Unsupported or blocked audio never interrupts navigation.
+Switching dock destinations plays a quiet 70ms wooden tap after a user navigation gesture. A filtered strike and quickly damped resonances replace the electronic pitch sweep; the locally generated buffer is reused between taps. There is no audio download or autoplay. Re-selecting the current destination, hovering, opening a modified link, and theme changes stay silent. Unsupported or blocked audio never interrupts navigation.
 
 Writing routes share their shell through the posts layout. A route loading boundary shows a static, accessible article placeholder while server content is pending; it does not animate or block navigation. The dock prefetches the writing index and its data in production so the primary destination can be ready before a tap. Network delays can still occur on cold or uncached requests.
 
