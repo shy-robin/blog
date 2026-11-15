@@ -22,13 +22,13 @@ One Light: background #fafafa, foreground #383a42, muted #626772, surface #eaeae
 
 One Dark: background #282c34, foreground #abb2bf, muted #939baa, surface #21252b, line #3e4451, accent/focus #61afef. Selection #3e4451 with #d7dae0 text. Secondary text is brighter than syntax comments so article dates and navigation remain readable.
 
-All interface surfaces use semantic CSS variables, including forms, tags, empty states, code surrounds, focus, selection and the dock. Code blocks use Shiki's bundled `one-light` / `one-dark-pro` themes with CSS-variable switching. No external font or theme dependency is added.
+All interface surfaces use semantic CSS variables, including forms, tags, empty states, code surrounds, focus, selection and the dock. Code blocks use Shiki's bundled `one-light` / `one-dark-pro` themes with CSS-variable switching. Fonts and theme resources are served locally without a third-party runtime dependency.
 
 Palette sources: [One Light](https://github.com/atom/one-light-syntax/blob/master/styles/colors.less), [One Dark](https://github.com/atom/one-dark-syntax/blob/master/styles/colors.less), and the installed Shiki themes' VS Code UI color maps.
 
 ## Typography
 
-Existing self-hosted Geist and Chinese system fallback match the quiet contemporary reference. Utility text is 12–13px; the about page carries the personal introduction. Article list titles are 20px on desktop and 18px on mobile. Inner article bodies use 16px on desktop and 15px on mobile, with a 2.0 line height. Monospace only for dates, counts and code.
+The interface and article prose use self-hosted LXGW WenKai Screen, with Geist and Chinese system fonts as fallbacks. The 97 WOFF2 unicode-range subsets come from lxgw-wenkai-screen-webfont 1.7.0, retain their OFL and wrapper license files, and are emitted as hashed same-origin assets by Next.js. Browsers request only the subsets needed for visible characters with font-display swap. Geist Sans fallback is not preloaded; code and numeric utility text retain Geist Mono. Utility text is 12–13px; the about page carries the personal introduction. Article list titles are 20px on desktop and 18px on mobile. Inner article bodies use 16px on desktop and 15px on mobile, with a 2.0 line height. Monospace only for dates, counts and code.
 
 Reading refinements retain the narrow frame and existing content. List excerpts are limited to three lines; full text stays on the article page. Article tags use quiet text links with 44px touch targets. On phones, filter tags form one horizontally scrollable row so the writing remains near the top of the page. Quotes and the table of contents use a subtle semantic surface (#f3f3f4 / #2c313a); code blocks scroll internally and never widen the page.
 
