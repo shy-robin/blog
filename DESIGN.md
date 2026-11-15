@@ -22,7 +22,9 @@ Palette sources: [One Light](https://github.com/atom/one-light-syntax/blob/maste
 
 ## Typography
 
-Existing self-hosted Geist and Chinese system fallback match the quiet contemporary reference. Identity 22px; prose 15px with 1.95 line height; utility text 12–13px; compact writing titles 15px. Inner article bodies remain 16px. Monospace only for dates, counts and code.
+Existing self-hosted Geist and Chinese system fallback match the quiet contemporary reference. Identity 30px; prose 15px with 1.95 line height; utility text 12–13px; compact writing titles 15px. Article list titles are 20px on desktop and 18px on mobile. Inner article bodies use 16px on desktop and 15px on mobile, with a 2.0 line height. Monospace only for dates, counts and code.
+
+Reading refinements retain the narrow frame and existing content. List excerpts are limited to three lines; full text stays on the article page. Article tags use quiet text links with 44px touch targets. On phones, filter tags form one horizontally scrollable row so the writing remains near the top of the page. Quotes and the table of contents use a subtle semantic surface (#f3f3f4 / #2c313a); code blocks scroll internally and never widen the page.
 
 ## Interaction
 

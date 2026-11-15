@@ -12,6 +12,7 @@
   --focus: #4078f2;
   --line: #dbdbdc;
   --surface: #eaeaeb;
+  --surface-subtle: #f3f3f4;
   --button-foreground: #fff;
   --selection-background: #e5e5e6;
   --selection-foreground: #383a42;
@@ -25,6 +26,7 @@
   --focus: #61afef;
   --line: #3e4451;
   --surface: #21252b;
+  --surface-subtle: #2c313a;
   --button-foreground: #282c34;
   --selection-background: #3e4451;
   --selection-foreground: #d7dae0;
@@ -110,13 +112,13 @@ summary:focus-visible,
   z-index: 200;
 }
 .personal-intro {
-  padding: 64px 0 40px;
+  padding: 76px 0 44px;
 }
 .personal-intro h1 {
   display: flex;
   align-items: baseline;
   gap: 3px;
-  font-size: 23px;
+  font-size: 30px;
   font-weight: 650;
   letter-spacing: -0.035em;
   line-height: 1.5;
@@ -128,7 +130,7 @@ summary:focus-visible,
   line-height: 0;
 }
 .personal-prose {
-  max-width: 480px;
+  max-width: 520px;
   font-size: 15px;
   line-height: 1.95;
   color: var(--muted);
@@ -168,7 +170,7 @@ summary:focus-visible,
   grid-template-columns: 24px 1fr 20px;
   align-items: center;
   gap: 4px 12px;
-  padding: 24px 28px;
+  padding: 22px 28px;
   min-width: 0;
   font-size: 14px;
 }
@@ -208,9 +210,9 @@ summary:focus-visible,
 }
 .index-heading h2,
 .section-heading h2 {
-  color: var(--muted);
-  font-size: 13px;
-  font-weight: 500;
+  color: var(--foreground);
+  font-size: 14px;
+  font-weight: 600;
 }
 .index-heading > a,
 .section-heading > a {
@@ -235,8 +237,8 @@ summary:focus-visible,
   grid-template-columns: 20px minmax(0, 1fr) auto 16px;
   align-items: center;
   gap: 12px;
-  min-height: 70px;
-  padding: 14px 0;
+  min-height: 76px;
+  padding: 18px 0;
 }
 .writing-index h3 {
   font-size: 15px;
@@ -284,7 +286,7 @@ summary:focus-visible,
   display: grid;
   grid-template-columns: minmax(0, 1fr) 44px;
   gap: 8px 16px;
-  padding: 24px 0;
+  padding: 30px 0;
   border-bottom: 1px solid var(--line);
 }
 .post-date {
@@ -296,7 +298,7 @@ summary:focus-visible,
 }
 .post-title {
   font-weight: 550;
-  font-size: 19px;
+  font-size: 20px;
   line-height: 1.6;
   overflow-wrap: anywhere;
 }
@@ -305,6 +307,13 @@ summary:focus-visible,
   font-size: 14px;
   line-height: 1.9;
   margin-top: 8px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+.post-row > div:nth-child(2) {
+  min-width: 0;
 }
 .read-link {
   display: flex;
@@ -321,7 +330,7 @@ summary:focus-visible,
 }
 .tags {
   display: flex;
-  gap: 8px;
+  gap: 4px 12px;
   flex-wrap: wrap;
   margin-top: 12px;
   list-style: none;
@@ -340,9 +349,7 @@ summary:focus-visible,
   min-height: 44px;
   max-width: 100%;
   color: var(--muted);
-  background: var(--surface);
-  padding: 8px 12px;
-  border-radius: 6px;
+  padding: 6px 0;
   overflow-wrap: anywhere;
 }
 .site-dock {
@@ -524,7 +531,8 @@ summary:focus-visible,
   font-size: 30px;
   font-weight: 600;
   margin: 0 0 16px;
-  letter-spacing: -1px;
+  letter-spacing: -0.03em;
+  line-height: 1.4;
 }
 .page-intro > p:last-child {
   color: var(--muted);
@@ -587,10 +595,11 @@ summary:focus-visible,
 }
 .article-header h1 {
   margin: 30px 0 20px;
-  font-size: clamp(30px, 4vw, 44px);
+  font-size: clamp(28px, 3.4vw, 38px);
   line-height: 1.4;
   font-weight: 680;
-  letter-spacing: -1px;
+  letter-spacing: -0.03em;
+  text-wrap: pretty;
   overflow-wrap: anywhere;
 }
 .article-meta {
@@ -599,6 +608,7 @@ summary:focus-visible,
   gap: 24px;
   font-size: 12px;
   color: var(--muted);
+  font-variant-numeric: tabular-nums;
 }
 .article-summary {
   border-left: 1px solid var(--line);
@@ -624,7 +634,7 @@ summary:focus-visible,
 }
 .article-body {
   min-width: 0;
-  line-height: 1.95;
+  line-height: 2;
   font-size: 16px;
   overflow-wrap: anywhere;
 }
@@ -636,14 +646,14 @@ summary:focus-visible,
 }
 .article-body h1,
 .article-body h2 {
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 650;
   margin: 44px 0 18px;
   line-height: 1.5;
   scroll-margin-top: 24px;
 }
 .article-body h3 {
-  font-size: 21px;
+  font-size: 20px;
   font-weight: 650;
   margin: 30px 0 14px;
   scroll-margin-top: 24px;
@@ -676,7 +686,7 @@ summary:focus-visible,
   padding: 4px 22px;
   margin: 24px 0;
   color: var(--muted);
-  background: var(--surface);
+  background: var(--surface-subtle);
 }
 .article-body :not(pre) > code {
   font:
@@ -689,7 +699,7 @@ summary:focus-visible,
 .code-block {
   margin: 28px 0;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   overflow: hidden;
 }
 .code-block figcaption {
@@ -707,6 +717,8 @@ summary:focus-visible,
   font:
     13px/1.85 var(--font-geist-mono),
     monospace;
+  tab-size: 2;
+  scrollbar-width: thin;
 }
 .code-block .shiki,
 .code-block .shiki span {
@@ -724,6 +736,7 @@ summary:focus-visible,
 .body-image img {
   width: 100%;
   height: auto;
+  border-radius: 6px;
 }
 .body-image figcaption {
   text-align: center;
@@ -747,6 +760,7 @@ summary:focus-visible,
   border: 1px solid var(--line);
   border-radius: 8px;
   font-size: 12px;
+  background: var(--surface-subtle);
 }
 .article-toc summary {
   cursor: pointer;
@@ -1091,7 +1105,10 @@ summary:focus-visible,
   margin-top: 20px;
 }
 .tag-filters a {
-  padding: 7px 12px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 12px;
   border: 1px solid var(--line);
   border-radius: 5px;
   font-size: 12px;
@@ -1119,6 +1136,9 @@ summary:focus-visible,
 .search-summary a {
   flex-shrink: 0;
   color: var(--accent);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
 }
 .status-page {
   max-width: 700px;
@@ -1181,7 +1201,7 @@ summary:focus-visible,
     border: 0;
   }
   .personal-intro {
-    padding: 40px 0 32px;
+    padding: 48px 0 36px;
   }
   .home-directory {
     margin-inline: -22px;
@@ -1222,7 +1242,35 @@ summary:focus-visible,
     padding: 14px 0;
   }
   .post-title {
-    font-size: 20px;
+    font-size: 18px;
+  }
+  .post-row {
+    gap: 10px 8px;
+    padding-block: 26px;
+  }
+  .post-search {
+    gap: 8px;
+  }
+  .post-search button {
+    padding-inline: 16px;
+  }
+  .tag-filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 4px 4px 12px;
+    margin-inline: -4px;
+    scrollbar-width: thin;
+  }
+  .tag-filters a {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .article-body {
+    font-size: 15px;
+  }
+  .code-block pre {
+    padding: 16px;
+    font-size: 12px;
   }
   .article-header {
     padding-top: 32px;
