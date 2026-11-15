@@ -8,6 +8,8 @@ A narrow, centered personal page (680px outer column) with fine vertical boundar
 
 No fabricated shelves, music collection, biography, portraits or project counts. Render only real published content; section labels describe content rather than arbitrary sequence numbers.
 
+The about page pairs a naturally wrapping greeting with a 112px transparent avatar, reduced to 80px and top-aligned on phones. Avatar images use contain rather than cropping; missing or failed images show a transparent initial instead of a clipped error card. Desktop sections share a 112px label column and 24px gutter; phones stack headings above content. Reading, project, subscription and contact links use the shared arrow style and at least 44px touch targets.
+
 ## Tokens
 
 User-selected palette: One Light for light mode, One Dark for dark mode. Layout and typography continue to follow the cali.so reference.

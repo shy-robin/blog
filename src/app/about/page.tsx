@@ -10,6 +10,7 @@ import {
 } from "@/lib/portfolio";
 import { imageUrl, imageDimensions } from "@/sanity/images";
 import { getPageMetadata } from "@/lib/seo";
+import { ArrowRight } from "@/components/arrow-right";
 
 export const revalidate = 60;
 export async function generateMetadata(): Promise<Metadata> {
@@ -26,6 +27,12 @@ export default async function AboutPage() {
   const avatar = imageUrl(profile.avatar, 400);
   const github = safeExternalUrl(profile.githubUrl);
   const email = contactEmailUrl(profile.email);
+  const avatarFallback = (
+    <span className="profile-initial" aria-hidden="true">
+      {profile.name.slice(0, 1).toUpperCase()}
+      <span className="brand-dot">.</span>
+    </span>
+  );
   const paragraphs =
     profile.bio
       ?.split(/\n\s*\n/)
@@ -36,9 +43,7 @@ export default async function AboutPage() {
       <section className="about-intro">
         <div>
           <h1>
-            你好，我是
-            <br />
-            <span>{profile.name}</span>。
+            你好，我是 <span>{profile.name}</span>。
           </h1>
           <p className="about-headline">{profile.intro}</p>
           {profile.location && (
@@ -51,14 +56,12 @@ export default async function AboutPage() {
               src={avatar}
               alt={profile.avatar?.alt || `${profile.name} 的头像`}
               {...imageDimensions(profile.avatar)}
-              sizes="(max-width: 520px) 100px, 160px"
+              sizes="(max-width: 520px) 80px, 112px"
               priority
+              fallback={avatarFallback}
             />
           ) : (
-            <span aria-hidden="true">
-              {profile.name.slice(0, 1).toUpperCase()}
-              <span className="brand-dot">.</span>
-            </span>
+            avatarFallback
           )}
         </div>
       </section>
@@ -114,9 +117,15 @@ export default async function AboutPage() {
               前端文章为主，记录真实工程中的问题、分析过程与方案取舍，也保留一些生活里的思考。
             </p>
             <div className="about-actions">
-              <Link href="/posts">阅读文章 →</Link>
-              <Link href="/projects">看看项目 →</Link>
-              <a href="/feed.xml">通过 RSS 订阅更新 →</a>
+              <Link href="/posts">
+                阅读文章 <ArrowRight />
+              </Link>
+              <Link href="/projects">
+                看看项目 <ArrowRight />
+              </Link>
+              <a href="/feed.xml">
+                通过 RSS 订阅更新 <ArrowRight />
+              </a>
             </div>
           </div>
         </section>
@@ -126,7 +135,7 @@ export default async function AboutPage() {
             <div className="about-actions">
               {github && (
                 <a href={github} target="_blank" rel="noreferrer">
-                  GitHub ↗
+                  GitHub <ArrowRight />
                 </a>
               )}
               {email && <a href={email}>{profile.email}</a>}
