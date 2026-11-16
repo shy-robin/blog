@@ -80,6 +80,7 @@ npm run dev
 - [DESIGN.md](DESIGN.md)：视觉系统、布局、主题与交互约定
 - [PRODUCT.md](PRODUCT.md)：产品定位与内容约束
 - [docs/sanity.md](docs/sanity.md)：Sanity 后台、缓存与 webhook 配置
+- [docs/ci.md](docs/ci.md)：CI 流水线与密钥扫描
 - [docs/portfolio.md](docs/portfolio.md)：项目与个人资料编辑说明
 - [docs/seo.md](docs/seo.md)：站点地图、RSS、元数据与验证
 - [docs/giscus.md](docs/giscus.md)：评论配置与关联规则
