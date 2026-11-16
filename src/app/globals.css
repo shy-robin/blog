@@ -309,19 +309,23 @@ summary:focus-visible,
   padding: 0;
 }
 .tags li {
+  display: inline-flex;
   min-width: 0;
   max-width: 100%;
-  font-size: 12px;
+  min-height: 32px;
+  background: var(--surface);
+  border-radius: 999px;
+  font-size: 13px;
 }
 .tags a {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 44px;
-  min-height: 44px;
+  min-height: 32px;
   max-width: 100%;
+  padding: 0 12px;
   color: var(--muted);
-  padding: 6px 0;
   overflow-wrap: anywhere;
 }
 .site-dock {
@@ -493,10 +497,11 @@ summary:focus-visible,
   display: flex;
   align-items: baseline;
   gap: 10px;
-  font-size: 24px;
+  font-family: var(--font-display);
+  font-size: 28px;
   font-weight: 500;
   margin: 0;
-  letter-spacing: 0;
+  letter-spacing: -0.01em;
   line-height: 1.5;
 }
 .preview-banner {
@@ -534,10 +539,11 @@ summary:focus-visible,
 }
 .article-header h1 {
   margin: 30px 0 20px;
+  font-family: var(--font-display);
   font-size: clamp(28px, 3.4vw, 38px);
   line-height: 1.4;
-  font-weight: 680;
-  letter-spacing: -0.03em;
+  font-weight: 500;
+  letter-spacing: -0.01em;
   text-wrap: pretty;
   overflow-wrap: anywhere;
 }
@@ -730,14 +736,16 @@ summary:focus-visible,
 }
 .empty-state h2,
 .empty-state h3 {
-  font-weight: 650;
-  font-size: 20px;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 24px;
 }
 .empty-state p {
   margin-top: 12px;
   color: var(--muted);
 }
-.blog-shell.about-shell {
+.blog-shell.about-shell,
+.blog-shell:has(.page-intro) {
   width: min(100%, 880px);
   padding-inline: 40px;
 }
@@ -773,10 +781,11 @@ summary:focus-visible,
   object-fit: contain;
 }
 .about-identity h1 {
+  font-family: var(--font-display);
   font-size: 28px;
-  font-weight: 650;
+  font-weight: 500;
   line-height: 1.35;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.01em;
   margin: 0 0 16px;
   text-wrap: balance;
   overflow-wrap: anywhere;
@@ -1140,14 +1149,23 @@ summary:focus-visible,
 }
 .tag-filters a,
 .tag-filters .tag-toggle {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
-  padding: 8px 12px;
-  border: 1px solid var(--line);
+  min-height: 32px;
+  padding: 0 12px;
+  border: 0;
+  background: var(--surface);
   border-radius: 999px;
-  font-size: 12px;
+  font-size: 13px;
   color: var(--muted);
+}
+.tag-filters a::after,
+.tag-filters .tag-toggle::after,
+.tags a::after {
+  content: "";
+  position: absolute;
+  inset: -6px 0;
 }
 .tag-filters a[hidden] {
   display: none;
@@ -1168,9 +1186,8 @@ summary:focus-visible,
   outline-offset: 2px;
 }
 .tag-filters a[aria-current="page"] {
-  border-color: var(--accent);
-  background: var(--surface);
-  color: var(--accent);
+  background: var(--accent);
+  color: var(--button-foreground);
 }
 .tag-filters span {
   margin-left: 6px;
@@ -1204,9 +1221,10 @@ summary:focus-visible,
   padding: 32px;
 }
 .status-page h1 {
+  font-family: var(--font-display);
   font-size: 30px;
   margin: 20px 0;
-  font-weight: 650;
+  font-weight: 500;
 }
 .status-page > p {
   color: var(--muted);
@@ -1234,7 +1252,8 @@ summary:focus-visible,
   }
 }
 @media (max-width: 860px) {
-  .blog-shell.about-shell {
+  .blog-shell.about-shell,
+  .blog-shell:has(.page-intro) {
     padding-inline: 28px;
   }
   .about-layout {
@@ -1272,13 +1291,17 @@ summary:focus-visible,
   .about-identity h1 {
     font-size: 26px;
   }
+  .page-intro h1 {
+    font-size: 26px;
+  }
   .about-section h2 {
     font-size: 24px;
   }
   .about-section + .about-section {
     margin-top: 40px;
   }
-  .blog-shell.about-shell {
+  .blog-shell.about-shell,
+  .blog-shell:has(.page-intro) {
     padding: 0 22px calc(96px + env(safe-area-inset-bottom));
     border: 0;
   }
