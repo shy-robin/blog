@@ -42,3 +42,4 @@ npm run lint
 ## 3. 项目约定
 
 - **Commit 信息**: 使用中文生成 commit 信息。
+- **敏感信息与个人数据**: 开始工作前必读并遵守 [AGENTS.md](AGENTS.md) 中的敏感信息约定；禁止提交密钥与真实个人数据，提交前自查 staged diff。
