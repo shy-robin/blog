@@ -41,3 +41,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Hallmark 设计草稿与截图（可能含本地预览数据，不入库）
+.hallmark/
