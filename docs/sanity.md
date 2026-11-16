@@ -25,7 +25,7 @@
 
 ### 可选：发布后立即刷新
 
-1. 在部署平台设置一个随机的 `SANITY_REVALIDATE_SECRET` 环境变量，并重新部署。
+1. 在 Vercel 项目的环境变量（Production 作用域）中设置一个随机的 `SANITY_REVALIDATE_SECRET`，并重新部署。
 2. 在 Sanity 项目的 API → Webhooks 创建 webhook：URL 填写 `https://你的域名/api/revalidate`，方法 POST，选择 production 数据集，启用 Create、Update、Delete。
 3. Filter 填写 `_type in ["post", "project", "profile"]`，Projection 填写 `{_type}`，Secret 填写同一密钥。不要启用草稿触发。
 4. 发布、更新或删除文章后验证 webhook 投递成功。接口校验签名后清除文章缓存，下次访问将读取新内容。
@@ -41,7 +41,7 @@
 1. `SANITY_API_READ_TOKEN`：在 Sanity 管理平台 API → Tokens 新建 token，权限选 **Viewer**（只读）。不要给 Editor 或更高权限，不要放入 `NEXT_PUBLIC_*`。
 2. `SANITY_PREVIEW_SECRET`：本地执行 `openssl rand -hex 32` 生成随机值，自行保存。
 
-两个变量配置到部署环境后重启/重新部署。未配置时预览入口返回 503，不影响网站其他功能。变量值不写入仓库。
+两个变量配置到 Vercel（Production 作用域）后重新部署才生效。未配置时预览入口返回 503，不影响网站其他功能。变量值不写入仓库。
 
 ### 使用
 

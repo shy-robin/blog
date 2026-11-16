@@ -55,7 +55,7 @@ npm run dev
 | --- | --- |
 | `npm run dev` | 开发服务器 |
 | `npm run build` / `npm start` | 生产构建 / 启动 |
-| `npm run pm2start` | 以 pm2 守护进程启动（进程名 `nextjsBlog`） |
+| `npm run pm2start` | 可选自托管：以 pm2 守护进程启动（进程名 `nextjsBlog`），正式站实际部署在 Vercel |
 | `npm test` | 运行测试（esbuild 打包后 `node --test` + jsdom，输出到 `.test-output/`） |
 | `npm run lint` | ESLint |
 | `npm run format` / `format:check` | Prettier 格式化 / 检查 |
@@ -71,7 +71,7 @@ npm run dev
 
 ## 部署
 
-`npm run build` 后可用任意 Node.js 方式托管，仓库提供 pm2 脚本（`npm run pm2start`）。上线前确认：
+正式站部署在 **Vercel**：推送 main 分支自动触发构建与部署，无需手动执行 `npm run build`。环境变量在 Vercel 项目 Settings → Environment Variables 配置（Production 作用域），**修改后必须重新部署才生效**。仓库保留的 pm2 脚本（`npm run pm2start`）仅供可选的 Node.js 自托管。上线前确认：
 
 1. `NEXT_PUBLIC_SITE_URL` 指向正式域名；
 2. Sanity CORS origins 已添加正式域名（供 `/studio` 使用）；
