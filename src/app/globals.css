@@ -855,10 +855,11 @@ summary:focus-visible,
   gap: 8px;
 }
 .interest-tags li {
-  padding: 5px 12px;
-  border: 1px solid var(--line);
-  font-size: 13px;
-  border-radius: 5px;
+  padding: 6px 16px;
+  background: var(--surface);
+  font-size: 14px;
+  line-height: 1.6;
+  border-radius: 999px;
 }
 .experience-list li {
   position: relative;
