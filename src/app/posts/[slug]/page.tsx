@@ -1,32 +1,36 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { draftMode } from "next/headers";
 import { SanityImage } from "@/components/sanity-image";
 import { notFound } from "next/navigation";
 import { ArticleBody } from "@/components/article-body";
-import { getPost, getPosts, getHeadings, formatDate } from "@/sanity/posts";
+import { PreviewBanner } from "@/components/preview-banner";
+import { getPost, getHeadings, formatDate } from "@/sanity/posts";
 import { imageUrl, imageDimensions } from "@/sanity/images";
 import { postsUrl } from "@/lib/post-search";
 import { Comments } from "@/components/comments";
 import { getPostMetadata } from "@/lib/seo";
 type Props = { params: Promise<{ slug: string }> };
-export const revalidate = 60;
-export async function generateStaticParams() {
-  return (await getPosts()).map((post) => ({ slug: post.slug }));
-}
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getPost(slug);
+  const draft = (await draftMode()).isEnabled;
+  const post = await getPost(slug, draft);
   if (!post) notFound();
-  return getPostMetadata(post);
+  const metadata = getPostMetadata(post);
+  return draft
+    ? { ...metadata, robots: { index: false, follow: false } }
+    : metadata;
 }
 export default async function PostPage({ params }: Props) {
   const { slug } = await params;
-  const post = await getPost(slug);
+  const draft = (await draftMode()).isEnabled;
+  const post = await getPost(slug, draft);
   if (!post) notFound();
   const headings = getHeadings(post.body);
   const cover = imageUrl(post.coverImage);
   return (
     <>
+      {draft && <PreviewBanner />}
       <article className="article">
         <header className="article-header">
           <Link className="back-link" href="/posts">

@@ -13,7 +13,7 @@
 
 ## 页面元数据
 
-首页、文章列表和详情都有指向正式域名的 canonical。搜索/标签筛选结果标记为 `noindex, follow`，canonical 指向 `/posts`；不会写入站点地图。`/studio` 保留 noindex 设置。
+首页、文章列表和详情都有指向正式域名的 canonical。搜索/标签筛选结果标记为 `noindex, follow`，canonical 指向 `/posts`；不会写入站点地图。`/studio` 保留 noindex 设置。草稿预览页标记为 `noindex, nofollow`，草稿不进站点地图与 RSS。
 
 文章设置独立的 Open Graph 和 Twitter 大图卡片元数据。优先使用封面并指定 JPEG 格式，缺少封面时使用 `/og` 默认图；缺少摘要时提供文字回退。分享平台是否实际展示卡片以及旧预览何时更新，由平台自己的抓取和缓存策略决定。
 

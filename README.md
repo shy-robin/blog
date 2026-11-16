@@ -42,6 +42,8 @@ npm run dev
 | `NEXT_PUBLIC_SANITY_PROJECT_ID` | Sanity 项目 ID，默认 `e4fd09lc`（公开标识，非密钥） |
 | `NEXT_PUBLIC_SANITY_DATASET` | Sanity 数据集，默认 `production` |
 | `SANITY_REVALIDATE_SECRET` | Sanity 发布 webhook 的签名密钥；配置后 `/api/revalidate` 可在发布时即时刷新缓存 |
+| `SANITY_API_READ_TOKEN` | 草稿预览用 Sanity Viewer 只读 token（服务端密钥，可选），见 [docs/sanity.md](docs/sanity.md) |
+| `SANITY_PREVIEW_SECRET` | 草稿预览入口的校验密钥（服务端密钥，可选），未配置时预览入口返回 503 |
 | `NEXT_PUBLIC_GISCUS_REPO` 等 4 项 | 覆盖 Giscus 评论仓库配置，见 [docs/giscus.md](docs/giscus.md) |
 | `NEXT_DIST_DIR` | 构建输出目录，默认 `.next`；验证构建可用 `.next-verify` 避免影响运行中的服务 |
 
@@ -74,6 +76,7 @@ npm run dev
 1. `NEXT_PUBLIC_SITE_URL` 指向正式域名；
 2. Sanity CORS origins 已添加正式域名（供 `/studio` 使用）；
 3. 可选：配置 `SANITY_REVALIDATE_SECRET` 与 Sanity webhook。
+4. 可选：配置 `SANITY_API_READ_TOKEN` 与 `SANITY_PREVIEW_SECRET` 启用草稿预览。
 
 ## 文档
 

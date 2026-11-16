@@ -496,6 +496,25 @@ summary:focus-visible,
   letter-spacing: 0;
   line-height: 1.5;
 }
+.preview-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  margin: 16px 0 0;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-subtle);
+  color: var(--muted);
+  font-size: 13px;
+}
+.preview-banner a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--accent);
+}
 .article-count {
   font:
     12px var(--font-geist-mono),

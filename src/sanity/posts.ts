@@ -1,6 +1,6 @@
 import "server-only";
 import { cache } from "react";
-import { client } from "./client";
+import { client, previewClient } from "./client";
 import type { PortableTextBlock } from "@portabletext/types";
 import { postPageQueries } from "@/lib/post-pagination";
 
@@ -53,12 +53,19 @@ export const getPosts = cache(
     ),
 );
 export const getPost = cache(
-  async (slug: string): Promise<Post | null> =>
-    client.fetch(
+  async (slug: string, draft = false): Promise<Post | null> => {
+    if (draft)
+      return previewClient().fetch(
+        `*[_type == "post" && slug.current == $slug][0]{${fields},body}`,
+        { slug },
+        { cache: "no-store" },
+      );
+    return client.fetch(
       `*[_type == "post" && slug.current == $slug && !(_id in path("drafts.**"))][0]{${fields},body}`,
       { slug },
       options,
-    ),
+    );
+  },
 );
 export function formatDate(value?: string) {
   if (!value || Number.isNaN(Date.parse(value))) return "";
