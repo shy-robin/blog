@@ -60,7 +60,7 @@ export function PostSearch({ query, tag }: { query: string; tag: string }) {
       }}
     >
       <label htmlFor="post-query" className="sr-only">
-        搜索文章标题、摘要或标签
+        搜索文章标题、摘要、标签或正文
       </label>
       <input
         ref={input}
@@ -68,7 +68,7 @@ export function PostSearch({ query, tag }: { query: string; tag: string }) {
         name="q"
         type="search"
         defaultValue={query}
-        placeholder="搜索标题、摘要或标签"
+        placeholder="搜索标题、摘要、标签或正文"
         maxLength={120}
         enterKeyHint="search"
         onChange={(event) => schedule(event.currentTarget.value)}

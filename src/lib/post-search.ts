@@ -6,21 +6,6 @@ export function searchValue(value?: string | string[]) {
     .slice(0, 120);
 }
 
-function normalize(value: string) {
-  return value.normalize("NFKC").toLocaleLowerCase("zh-CN");
-}
-
-export function filterPosts(posts: Post[], query: string, tag: string) {
-  const terms = normalize(query).trim().split(/\s+/).filter(Boolean);
-  return posts.filter((post) => {
-    if (tag && !post.tags?.includes(tag)) return false;
-    const text = normalize(
-      [post.title, post.excerpt || "", ...(post.tags || [])].join(" "),
-    );
-    return terms.every((term) => text.includes(term));
-  });
-}
-
 export function getTagCounts(posts: Pick<Post, "tags">[]) {
   const counts = new Map<string, number>();
   for (const post of posts) {

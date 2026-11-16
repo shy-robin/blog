@@ -25,7 +25,7 @@ export function postPageQueries(query: string, tag: string, page: number) {
     .trim()
     .split(/\s+/)
     .filter(Boolean);
-  const text = `lower(coalesce(title, "") + " " + coalesce(excerpt, "") + " " + array::join(coalesce(tags, []), " "))`;
+  const text = `lower(coalesce(title, "") + " " + coalesce(excerpt, "") + " " + array::join(coalesce(tags, []), " ") + " " + coalesce(pt::text(body), "") + " " + coalesce(array::join(body[_type == "codeBlock" && defined(code)].code, " "), ""))`;
   const filter = [
     published,
     `($tag == "" || $tag in tags)`,

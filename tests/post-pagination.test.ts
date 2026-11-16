@@ -16,6 +16,29 @@ const dataset = Array.from({ length: 25 }, (_, i) => ({
   tags: ["性能", "React"],
   slug: { current: `post-${i}` },
   publishedAt: "2021-01-01T00:00:00Z",
+  ...(i === 0
+    ? {
+        body: [
+          {
+            _type: "block",
+            _key: "b1",
+            style: "normal",
+            children: [{ _type: "span", _key: "s1", text: "正文独有词" }],
+          },
+          {
+            _type: "codeBlock",
+            _key: "c1",
+            language: "typescript",
+            code: "const NEEDLE_CODE = 42",
+          },
+          { _type: "codeBlock", _key: "c2", language: "typescript" },
+          { _type: "image", _key: "i1", alt: "图片描述独有词" },
+        ],
+      }
+    : {}),
+  ...(i === 1
+    ? { body: [{ _type: "image", _key: "i2", alt: "另一张图片" }] }
+    : {}),
 }));
 
 async function run(query: string, params: Record<string, string | number>) {
@@ -56,6 +79,25 @@ test("server filtering preserves literal punctuation, case, width and AND search
     const queries = postPageQueries(query, tag, 1);
     assert.equal((await run(queries.items, queries.params)).length, expected);
   }
+});
+
+test("full-text search covers body prose and code blocks but not image alt", async () => {
+  for (const [query, expected] of [
+    ["正文独有词", 1],
+    ["needle_code", 1],
+    ["正文独有词 needle_code", 1],
+    ["图片描述独有词", 0],
+    ["另一张图片", 0],
+  ] as const) {
+    const queries = postPageQueries(query, "", 1);
+    const items = await run(queries.items, queries.params);
+    assert.equal(items.length, expected);
+    const stats = await run(queries.stats, queries.params);
+    assert.equal(stats.matched, expected);
+  }
+  const queries = postPageQueries("正文独有词", "", 1);
+  const items = await run(queries.items, queries.params);
+  assert.equal(items[0]._id, "post-00");
 });
 
 test("page URLs preserve filters; invalid pages are safe and page numbers stay compact", () => {
