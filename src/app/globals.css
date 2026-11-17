@@ -529,13 +529,23 @@ summary:focus-visible,
     monospace;
   color: var(--muted);
 }
+.article {
+  width: min(100%, 680px);
+  margin-inline: auto;
+}
 .article-header {
   max-width: 800px;
   padding: 48px 0 38px;
 }
 .back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   color: var(--muted);
   font-size: 13px;
+}
+.back-link svg {
+  flex-shrink: 0;
 }
 .article-header h1 {
   margin: 30px 0 20px;
@@ -556,10 +566,9 @@ summary:focus-visible,
   font-variant-numeric: tabular-nums;
 }
 .article-summary {
-  border-left: 1px solid var(--line);
-  padding-left: 18px;
   margin-top: 24px;
-  color: var(--muted);
+  font-size: 18px;
+  color: var(--foreground);
   line-height: 1.9;
 }
 .article-cover {
@@ -591,10 +600,12 @@ summary:focus-visible,
 }
 .article-body h1,
 .article-body h2 {
-  font-size: 24px;
-  font-weight: 650;
-  margin: 44px 0 18px;
-  line-height: 1.5;
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 500;
+  margin: 56px 0 16px;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
   scroll-margin-top: 24px;
 }
 .article-body h3 {
@@ -627,11 +638,13 @@ summary:focus-visible,
   text-underline-offset: 4px;
 }
 .article-body blockquote {
-  border-left: 1px solid var(--line);
-  padding: 4px 22px;
-  margin: 24px 0;
-  color: var(--muted);
-  background: var(--surface-subtle);
+  border-left: 2px solid var(--accent);
+  padding: 4px 0 4px 24px;
+  margin: 32px 0;
+  font-family: var(--font-display);
+  font-size: 21px;
+  line-height: 1.7;
+  color: var(--foreground);
 }
 .article-body :not(pre) > code {
   font:
@@ -722,6 +735,93 @@ summary:focus-visible,
 .article-toc .toc-nested {
   padding-left: 12px;
 }
+.article-rail {
+  display: none;
+}
+@media (min-width: 1360px) {
+  .article-rail {
+    display: block;
+    position: fixed;
+    top: 120px;
+    left: calc(50% - 656px);
+    width: 200px;
+    font-size: 13px;
+  }
+  .article-rail-label {
+    margin: 0 0 8px;
+    color: var(--muted);
+  }
+  .article-rail ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .article-rail li a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 44px;
+    color: var(--muted);
+    line-height: 1.5;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    transition: color 200ms ease;
+  }
+  .article-rail li a::before {
+    content: "";
+    flex-shrink: 0;
+    width: 24px;
+    border-top: 1px solid var(--line);
+    transform: scaleX(0.67);
+    transform-origin: left center;
+    transition:
+      transform 200ms ease,
+      border-color 200ms ease;
+  }
+  .article-rail .toc-nested a {
+    padding-left: 12px;
+  }
+  .article-rail .toc-nested a::before {
+    width: 12px;
+  }
+  .article-rail a:hover,
+  .article-rail a:focus-visible,
+  .article-rail a[aria-current="location"] {
+    color: var(--foreground);
+  }
+  .article-rail a:hover::before,
+  .article-rail a:focus-visible::before,
+  .article-rail a[aria-current="location"]::before {
+    transform: scaleX(1);
+    border-color: var(--foreground);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .article-rail li a,
+    .article-rail li a::before {
+      transition: none;
+    }
+  }
+  .article-toc {
+    display: none;
+  }
+  .article-header > .back-link {
+    display: none;
+  }
+  .article-rail nav {
+    position: relative;
+    max-height: calc(100vh - 216px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
+  }
+  .article-rail .back-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-bottom: 16px;
+  }
+}
 .article-end {
   border-top: 1px solid var(--line);
   padding-top: 24px;
@@ -745,7 +845,8 @@ summary:focus-visible,
   color: var(--muted);
 }
 .blog-shell.about-shell,
-.blog-shell:has(.page-intro) {
+.blog-shell:has(.page-intro),
+.blog-shell:has(.article) {
   width: min(100%, 880px);
   padding-inline: 40px;
 }
@@ -1253,7 +1354,8 @@ summary:focus-visible,
 }
 @media (max-width: 860px) {
   .blog-shell.about-shell,
-  .blog-shell:has(.page-intro) {
+  .blog-shell:has(.page-intro),
+  .blog-shell:has(.article) {
     padding-inline: 28px;
   }
   .about-layout {
@@ -1301,7 +1403,8 @@ summary:focus-visible,
     margin-top: 40px;
   }
   .blog-shell.about-shell,
-  .blog-shell:has(.page-intro) {
+  .blog-shell:has(.page-intro),
+  .blog-shell:has(.article) {
     padding: 0 22px calc(96px + env(safe-area-inset-bottom));
     border: 0;
   }

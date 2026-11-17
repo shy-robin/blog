@@ -4,6 +4,8 @@ import { draftMode } from "next/headers";
 import { SanityImage } from "@/components/sanity-image";
 import { notFound } from "next/navigation";
 import { ArticleBody } from "@/components/article-body";
+import { BackArrow } from "@/components/back-arrow";
+import { ArticleTocNav } from "@/components/article-toc-nav";
 import { PreviewBanner } from "@/components/preview-banner";
 import { getPost, getHeadings, formatDate } from "@/sanity/posts";
 import { imageUrl, imageDimensions } from "@/sanity/images";
@@ -34,7 +36,8 @@ export default async function PostPage({ params }: Props) {
       <article className="article">
         <header className="article-header">
           <Link className="back-link" href="/posts">
-            ← 所有文章
+            <BackArrow />
+            所有文章
           </Link>
           <h1>{post.title}</h1>
           <div className="article-meta">
@@ -68,6 +71,13 @@ export default async function PostPage({ params }: Props) {
             />
           </div>
         )}
+        <aside className="article-rail">
+          <Link className="back-link" href="/posts">
+            <BackArrow />
+            所有文章
+          </Link>
+          {!!headings.length && <ArticleTocNav headings={headings} />}
+        </aside>
         <div className="article-layout">
           {!!headings.length && (
             <details className="article-toc">
