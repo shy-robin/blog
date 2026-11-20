@@ -6,7 +6,7 @@ import { PostSearch } from "@/components/post-search";
 import { getPostsPage } from "@/sanity/posts";
 import { getTagCounts, postsUrl, searchValue } from "@/lib/post-search";
 import { redirect } from "next/navigation";
-import { POSTS_PER_PAGE, pageNumbers, pageValue } from "@/lib/post-pagination";
+import { POSTS_PER_PAGE, pageValue } from "@/lib/post-pagination";
 import { site, absoluteUrl } from "@/lib/site";
 type Props = {
   searchParams: Promise<{
@@ -96,52 +96,110 @@ export default async function PostsPage({ searchParams }: Props) {
       )}
       {matched > 0 && (
         <div className="pagination-section">
-          <p className="pagination-summary">
-            共 {matched} 篇 · 第 {(page - 1) * POSTS_PER_PAGE + 1}–
-            {Math.min(page * POSTS_PER_PAGE, matched)} 篇
-          </p>
+          <p className="pagination-summary">共 {matched} 篇</p>
           {pages > 1 && (
             <nav className="pagination" aria-label="文章分页">
               {page > 1 ? (
                 <Link
                   prefetch={false}
+                  className="pagination-button"
                   href={postsUrl(query, tag, page - 1)}
                   rel="prev"
                 >
-                  上一页
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                    focusable="false"
+                  >
+                    <path d="m15 6-6 6 6 6" />
+                  </svg>
+                  <span className="sr-only">上一页</span>
                 </Link>
               ) : (
-                <span aria-disabled="true">上一页</span>
+                <span className="pagination-button" aria-disabled="true">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                    focusable="false"
+                  >
+                    <path d="m15 6-6 6 6 6" />
+                  </svg>
+                  <span className="sr-only">上一页</span>
+                </span>
               )}
-              <div className="pagination-numbers">
-                {pageNumbers(page, pages).map((number, index, numbers) => (
-                  <span className="pagination-item" key={number}>
-                    {index > 0 && number - numbers[index - 1] > 1 && (
-                      <span className="pagination-ellipsis" aria-hidden="true">
-                        …
-                      </span>
-                    )}
-                    <Link
-                      prefetch={false}
-                      href={postsUrl(query, tag, number)}
-                      aria-label={`第 ${number} 页`}
-                      aria-current={number === page ? "page" : undefined}
-                    >
-                      {number}
-                    </Link>
-                  </span>
-                ))}
-              </div>
+              <form className="pagination-jump" action="/posts" method="get">
+                {query && <input type="hidden" name="q" value={query} />}
+                {tag && <input type="hidden" name="tag" value={tag} />}
+                <label htmlFor="pagination-page" className="sr-only">
+                  跳转到页码
+                </label>
+                <input
+                  key={page}
+                  id="pagination-page"
+                  name="page"
+                  type="number"
+                  inputMode="numeric"
+                  min={1}
+                  max={pages}
+                  defaultValue={page}
+                />
+                <span aria-hidden="true">/ {pages}</span>
+              </form>
               {page < pages ? (
                 <Link
                   prefetch={false}
+                  className="pagination-button"
                   href={postsUrl(query, tag, page + 1)}
                   rel="next"
                 >
-                  下一页
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                    focusable="false"
+                  >
+                    <path d="m9 6 6 6-6 6" />
+                  </svg>
+                  <span className="sr-only">下一页</span>
                 </Link>
               ) : (
-                <span aria-disabled="true">下一页</span>
+                <span className="pagination-button" aria-disabled="true">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                    focusable="false"
+                  >
+                    <path d="m9 6 6 6-6 6" />
+                  </svg>
+                  <span className="sr-only">下一页</span>
+                </span>
               )}
             </nav>
           )}

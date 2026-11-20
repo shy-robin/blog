@@ -1,11 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { evaluate, parse } from "groq-js";
-import {
-  pageValue,
-  pageNumbers,
-  postPageQueries,
-} from "../src/lib/post-pagination";
+import { pageValue, postPageQueries } from "../src/lib/post-pagination";
 import { postsUrl } from "../src/lib/post-search";
 
 const dataset = Array.from({ length: 25 }, (_, i) => ({
@@ -119,5 +115,4 @@ test("page URLs preserve filters; invalid pages are safe and page numbers stay c
   assert.equal(url.searchParams.get("page"), "3");
   assert.equal(url.searchParams.get("q"), "React & Vue");
   assert.equal(url.searchParams.get("tag"), "前端/C++");
-  assert.deepEqual(pageNumbers(5, 20), [1, 4, 5, 6, 20]);
 });

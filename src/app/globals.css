@@ -1257,48 +1257,79 @@ summary:focus-visible,
   padding-bottom: 0;
 }
 .pagination-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
   margin-top: 32px;
 }
 .pagination-summary {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 13px;
   font-variant-numeric: tabular-nums;
-  text-align: center;
 }
 .pagination {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 8px;
-  margin-top: 16px;
-  font-size: 13px;
+  font-size: 12px;
 }
-.pagination a,
-.pagination > span {
+.pagination-button {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 44px;
-  min-height: 44px;
-  padding-inline: 8px;
-  border-radius: 6px;
-}
-.pagination [aria-current="page"] {
-  color: var(--accent);
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border-radius: 999px;
   background: var(--surface);
-  font-weight: 600;
+  color: var(--foreground);
+  text-decoration: none;
+  white-space: nowrap;
 }
-.pagination [aria-disabled="true"] {
+.pagination-button::after {
+  content: "";
+  position: absolute;
+  inset: -8px -4px;
+}
+a.pagination-button:hover {
+  color: var(--accent);
+}
+.pagination-button[aria-disabled="true"] {
   color: var(--muted);
+  opacity: 0.5;
 }
-.pagination-numbers,
-.pagination-item {
-  display: flex;
+.pagination-jump {
+  display: inline-flex;
   align-items: center;
-}
-.pagination-ellipsis {
-  padding-inline: 2px;
+  gap: 6px;
+  margin-inline: 8px;
   color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.pagination-jump input {
+  width: 44px;
+  height: 28px;
+  padding: 0 6px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--surface-subtle);
+  color: var(--foreground);
+  font: inherit;
+  text-align: center;
+  caret-color: var(--accent);
+  -moz-appearance: textfield;
+}
+.pagination-jump input::-webkit-outer-spin-button,
+.pagination-jump input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.pagination-jump input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 .posts-loading {
   padding-top: 44px;
@@ -1531,14 +1562,6 @@ summary:focus-visible,
     gap: 28px 20px;
     margin-top: 44px;
     padding-top: 28px;
-  }
-  .pagination {
-    flex-wrap: wrap;
-  }
-  .pagination-numbers {
-    order: 1;
-    flex-basis: 100%;
-    justify-content: center;
   }
   .profile-initial {
     font-size: 42px;

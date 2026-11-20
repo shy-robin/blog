@@ -10,12 +10,6 @@ export function pageValue(value?: string | string[]) {
     : 1;
 }
 
-export function pageNumbers(page: number, pages: number) {
-  return Array.from(new Set([1, page - 1, page, page + 1, pages]))
-    .filter((value) => value >= 1 && value <= pages)
-    .sort((a, b) => a - b);
-}
-
 const published = `_type == "post" && defined(slug.current) && !(_id in path("drafts.**")) && !(_id in path("versions.**"))`;
 
 export function postPageQueries(query: string, tag: string, page: number) {
