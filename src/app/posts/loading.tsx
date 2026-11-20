@@ -2,9 +2,11 @@ export default function PostsLoading() {
   return (
     <div className="posts-column">
       <section className="posts-loading" aria-busy="true">
-        <p role="status">正在加载文章…</p>
+        <p role="status" className="sr-only">
+          正在加载文章
+        </p>
         <div className="posts-loading-list" aria-hidden="true">
-          {[0, 1, 2, 3].map((item) => (
+          {[0, 1, 2, 3, 4, 5].map((item) => (
             <div className="loading-post" key={item}>
               <div className="loading-body">
                 <span className="loading-line loading-title" />

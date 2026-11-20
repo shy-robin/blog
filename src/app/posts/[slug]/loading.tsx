@@ -1,7 +1,17 @@
+const paragraphs = [
+  [100, 96, 58],
+  [100, 100, 92, 40],
+  [100, 94, 70],
+  [100, 98, 100, 46],
+  [100, 90],
+];
+
 export default function PostLoading() {
   return (
     <article className="article article-loading" aria-busy="true">
-      <p role="status">正在加载文章…</p>
+      <p role="status" className="sr-only">
+        正在加载文章
+      </p>
       <header className="article-header" aria-hidden="true">
         <span className="loading-line loading-back" />
         <span className="loading-line loading-article-title" />
@@ -12,11 +22,17 @@ export default function PostLoading() {
         <span className="loading-line loading-article-summary" />
       </header>
       <div className="loading-article-body" aria-hidden="true">
-        <span className="loading-line" />
-        <span className="loading-line" />
-        <span className="loading-line loading-article-short" />
-        <span className="loading-line" />
-        <span className="loading-line loading-article-short" />
+        {paragraphs.map((lines, index) => (
+          <div className="loading-paragraph" key={index}>
+            {lines.map((width, line) => (
+              <span
+                className="loading-line"
+                key={line}
+                style={{ width: `${width}%` }}
+              />
+            ))}
+          </div>
+        ))}
       </div>
     </article>
   );
