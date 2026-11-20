@@ -853,9 +853,8 @@ summary:focus-visible,
     display: flex;
     flex-direction: column;
     position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    max-height: calc(100vh - 168px);
+    top: 48px;
+    bottom: 48px;
     left: calc(50% - 656px);
     width: 200px;
     font-size: 13px;
@@ -922,7 +921,7 @@ summary:focus-visible,
   }
   .article-rail nav {
     position: relative;
-    flex: 0 1 auto;
+    flex: 1 1 auto;
     min-height: 0;
     overflow-y: auto;
     overscroll-behavior: contain;
@@ -937,6 +936,7 @@ summary:focus-visible,
   }
   .article-rail-tools {
     display: grid;
+    margin-top: auto;
     padding-top: 16px;
   }
   .article-rail-progress {
@@ -1004,6 +1004,7 @@ summary:focus-visible,
 }
 .blog-shell.about-shell,
 .blog-shell:has(.page-intro),
+.blog-shell:has(.posts-column),
 .blog-shell:has(.article) {
   width: min(100%, 880px);
   padding-inline: 40px;
@@ -1648,6 +1649,7 @@ a.pagination-button:hover {
 @media (max-width: 860px) {
   .blog-shell.about-shell,
   .blog-shell:has(.page-intro),
+  .blog-shell:has(.posts-column),
   .blog-shell:has(.article) {
     padding-inline: 28px;
   }
@@ -1689,6 +1691,7 @@ a.pagination-button:hover {
   }
   .blog-shell.about-shell,
   .blog-shell:has(.page-intro),
+  .blog-shell:has(.posts-column),
   .blog-shell:has(.article) {
     padding: 0 22px calc(96px + env(safe-area-inset-bottom));
     border: 0;
