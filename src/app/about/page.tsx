@@ -8,7 +8,7 @@ import { getPageMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
 export async function generateMetadata(): Promise<Metadata> {
-  const profile = displayProfile(await getProfile());
+  const profile = displayProfile(await getProfile().catch(() => null));
   return getPageMetadata(
     "关于",
     "/about",
@@ -17,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AboutPage() {
-  const profile = displayProfile(await getProfile());
+  const profile = displayProfile(await getProfile().catch(() => null));
   const avatar = imageUrl(profile.avatar, 400);
   const email = contactEmailUrl(profile.email);
   const qq = profile.qq?.trim();

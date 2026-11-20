@@ -254,52 +254,137 @@ summary:focus-visible,
   margin-top: 16px;
   font-size: 14px;
 }
+.posts-column {
+  width: min(100%, 640px);
+  margin: 0 auto;
+}
+.post-list {
+  margin-top: 40px;
+  border-top: 1px solid var(--line);
+}
 .post-row {
+  position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 44px;
-  gap: 8px 16px;
-  padding: 30px 0;
+  grid-template-columns: minmax(0, 1fr) 128px;
+  gap: 24px;
+  margin-inline: -16px;
+  padding: 20px 16px;
   border-bottom: 1px solid var(--line);
+  transition: background-color 200ms ease;
 }
-.post-date {
-  grid-column: 1 / -1;
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 11px;
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
+.post-row:last-child {
+  border-bottom: 0;
 }
-.post-title {
-  font-weight: 550;
-  font-size: 20px;
-  line-height: 1.6;
-  overflow-wrap: anywhere;
+.post-row:hover,
+.post-row:focus-within {
+  background: var(--surface-subtle);
 }
-.post-row p {
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.9;
-  margin-top: 8px;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
+.post-row:focus-within {
+  outline: 2px solid var(--focus);
+  outline-offset: -2px;
 }
-.post-row > div:nth-child(2) {
+.post-body {
   min-width: 0;
 }
-.read-link {
+.post-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.post-title a {
+  color: var(--foreground);
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+.post-title a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.post-title a:focus-visible {
+  outline: none;
+}
+.post-row:hover .post-title a,
+.post-row:focus-within .post-title a {
+  color: var(--accent);
+}
+.post-excerpt {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.post-meta {
   display: flex;
   align-items: center;
-  justify-content: center;
-  align-self: start;
-  min-width: 44px;
-  min-height: 44px;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
   color: var(--muted);
 }
-.read-link:hover,
-.read-link:focus-visible {
-  background: var(--surface);
+.post-meta time {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
 }
+.post-tags {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.post-tags a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 12px;
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 12px;
+  text-decoration: none;
+}
+.post-tags a:hover {
+  color: var(--accent);
+}
+.post-tags a:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.post-thumb {
+  position: relative;
+  display: block;
+  align-self: stretch;
+  min-height: 80px;
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--muted);
+  overflow: hidden;
+}
+.post-thumb svg {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  .post-row,
+  .post-title a {
+    transition: none;
+  }
+}
+
 .tags {
   display: flex;
   gap: 4px 12px;
@@ -1345,11 +1430,8 @@ summary:focus-visible,
     gap: 28px;
   }
   .post-row {
-    grid-template-columns: minmax(0, 1fr) 44px;
-    gap: 8px 16px;
-  }
-  .post-date {
-    grid-column: 1 / -1;
+    grid-template-columns: minmax(0, 1fr) 96px;
+    gap: 16px;
   }
 }
 @media (max-width: 860px) {
@@ -1421,9 +1503,18 @@ summary:focus-visible,
   .post-title {
     font-size: 18px;
   }
+  .post-thumb {
+    min-height: 64px;
+  }
   .post-row {
-    gap: 10px 8px;
-    padding-block: 26px;
+    gap: 12px;
+  }
+  .post-meta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .post-tags {
+    justify-content: flex-start;
   }
   .tag-filters {
     flex-wrap: nowrap;

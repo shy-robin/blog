@@ -68,7 +68,7 @@ export default async function PostsPage({ searchParams }: Props) {
   const tags = getTagCounts(tagSets);
   const hasFilters = Boolean(query || tag);
   return (
-    <>
+    <div className="posts-column">
       <section className="page-intro">
         <h1>
           文章<span className="article-count">{total}</span>
@@ -151,6 +151,6 @@ export default async function PostsPage({ searchParams }: Props) {
           )}
         </div>
       )}
-    </>
+    </div>
   );
 }
