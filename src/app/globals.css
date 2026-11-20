@@ -1388,6 +1388,55 @@ a.pagination-button:hover {
   height: 80px;
   border-radius: 8px;
 }
+.loading-back {
+  width: 64px;
+  height: 12px;
+  margin-bottom: 30px;
+}
+.loading-article-title {
+  height: 26px;
+  width: 92%;
+  margin-block: 0;
+}
+.loading-article-title + .loading-article-title {
+  margin-top: 12px;
+}
+.loading-article-title-short {
+  width: 58%;
+}
+.loading-article-summary {
+  height: 14px;
+  width: 80%;
+  margin-top: 24px;
+}
+.blog-shell:has(.article-loading) {
+  display: flex;
+  flex-direction: column;
+}
+.blog-shell:has(.article-loading) > main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.article-loading {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.loading-article-body {
+  display: grid;
+  flex: 1;
+  align-content: start;
+  gap: 14px;
+  margin-top: 44px;
+}
+.loading-article-body .loading-line {
+  height: 12px;
+  margin-block: 0;
+}
+.loading-article-short {
+  width: 60%;
+}
 .post-search {
   display: flex;
   width: 100%;
