@@ -69,12 +69,15 @@ export const getPost = cache(
 );
 export function formatDate(value?: string) {
   if (!value || Number.isNaN(Date.parse(value))) return "";
-  return new Intl.DateTimeFormat("zh-CN", {
+  const parts = new Intl.DateTimeFormat("en", {
     year: "numeric",
-    month: "long",
-    day: "numeric",
+    month: "2-digit",
+    day: "2-digit",
     timeZone: "Asia/Shanghai",
-  }).format(new Date(value));
+  }).formatToParts(new Date(value));
+  const part = (type: string) =>
+    parts.find((item) => item.type === type)?.value;
+  return `${part("year")}/${part("month")}/${part("day")}`;
 }
 export function getHeadings(body: PostBody[] = []) {
   return body.flatMap((block) => {
