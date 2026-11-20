@@ -44,7 +44,23 @@ export function PostTagFilters({
           aria-expanded={expanded}
           onClick={() => setExpanded(!expanded)}
         >
-          {expanded ? "收起标签 −" : `展开全部 +${hiddenCount}`}
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+          <span className="sr-only">
+            {expanded ? "收起标签" : `展开全部标签，还有 ${hiddenCount} 个`}
+          </span>
         </button>
       )}
     </nav>

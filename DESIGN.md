@@ -8,7 +8,7 @@ A centred personal page with fine vertical boundary rules, 880px wide on every p
 
 No fabricated shelves, music collection, biography, portraits or project counts. Render only real published content; section labels describe content rather than arbitrary sequence numbers.
 
-Article search uses a full-width capsule input with 350ms debounced automatic search, respecting Chinese input composition. Enter searches immediately. Tag filters use filled capsules with a surface tint, the selected one in the accent colour; changing a query preserves the selected tag and resets pagination. The result summary and clear-filter link share one vertically centered row, with long summary text wrapping within its column.
+Article search uses a full-width capsule input with 350ms debounced automatic search, respecting Chinese input composition. Enter searches immediately. Tag filters and article tags use soft capsules on a surface tint, the selected filter in a pale accent tint with accent text; changing a query preserves the selected tag and resets pagination. The result summary and clear-filter link share one vertically centered row, with long summary text wrapping within its column.
 
 Tag filters initially show All and the five most frequent tags, keeping a selected lower-frequency tag visible. A lightweight expand/collapse control reveals the remaining tags on demand, keeping the desktop article list near the first viewport. Phones retain horizontal tag scrolling.
 

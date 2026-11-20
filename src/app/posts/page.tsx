@@ -89,11 +89,7 @@ export default async function PostsPage({ searchParams }: Props) {
       </section>
       {hasFilters && !matched ? (
         <section className="empty-state">
-          <h2>没有找到匹配的文章</h2>
-          <p>试试更短的关键词，或清除标签筛选。</p>
-          <Link className="text-link" href="/posts">
-            查看全部文章 →
-          </Link>
+          <h2>未找到匹配的文章</h2>
         </section>
       ) : (
         <PostList posts={posts} />
