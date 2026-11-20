@@ -4,7 +4,7 @@ Reference-directed redesign of the existing site following the user's request to
 
 ## Layout and hierarchy
 
-A centred personal page with fine vertical boundary rules, 880px wide on every page; the article reading column is 680px and centred inside that frame. The article index is the default entry; `/` permanently redirects to `/posts`, preserving query parameters. Personal introduction, blog purpose, project links and RSS subscription live together on the about page. There is no separate home page. Subpages share this frame. A fixed bottom dock carries four labeled destinations and a theme switch. Reserve bottom space and safe-area inset so it never hides content or keyboard focus.
+A centred personal page with fine vertical boundary rules, 880px wide on every page; the article reading column is 720px, the same as the article index column, so text edges stay put when moving between them. The article index is the default entry; `/` permanently redirects to `/posts`, preserving query parameters. Personal introduction, blog purpose, project links and RSS subscription live together on the about page. There is no separate home page. Subpages share this frame. A fixed bottom dock carries four labeled destinations and a theme switch. Reserve bottom space and safe-area inset so it never hides content or keyboard focus.
 
 No fabricated shelves, music collection, biography, portraits or project counts. Render only real published content; section labels describe content rather than arbitrary sequence numbers.
 

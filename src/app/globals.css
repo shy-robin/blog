@@ -640,7 +640,7 @@ summary:focus-visible,
   color: var(--muted);
 }
 .article {
-  width: min(100%, 680px);
+  width: min(100%, 720px);
   margin-inline: auto;
 }
 .article-header {
@@ -959,6 +959,14 @@ summary:focus-visible,
 .blog-shell:has(.article) {
   width: min(100%, 880px);
   padding-inline: 40px;
+}
+.blog-shell:has(.posts-column) .directory-footer {
+  width: min(100%, 720px);
+  margin-inline: auto;
+}
+.blog-shell:has(.article) .directory-footer {
+  width: min(100%, 720px);
+  margin-inline: auto;
 }
 .about-layout {
   display: grid;
