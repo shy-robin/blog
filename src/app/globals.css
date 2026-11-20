@@ -850,9 +850,12 @@ summary:focus-visible,
 }
 @media (min-width: 1360px) {
   .article-rail {
-    display: block;
+    display: flex;
+    flex-direction: column;
     position: fixed;
-    top: 120px;
+    top: 50%;
+    transform: translateY(-50%);
+    max-height: calc(100vh - 168px);
     left: calc(50% - 656px);
     width: 200px;
     font-size: 13px;
@@ -919,7 +922,8 @@ summary:focus-visible,
   }
   .article-rail nav {
     position: relative;
-    max-height: calc(100vh - 216px);
+    flex: 0 1 auto;
+    min-height: 0;
     overflow-y: auto;
     overscroll-behavior: contain;
     scrollbar-width: thin;
@@ -930,6 +934,50 @@ summary:focus-visible,
     align-items: center;
     min-height: 44px;
     margin-bottom: 16px;
+  }
+  .article-rail-tools {
+    display: grid;
+    padding-top: 16px;
+  }
+  .article-rail-progress {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    margin: 0;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .progress-track {
+    stroke: var(--line);
+  }
+  .progress-fill {
+    stroke: var(--accent);
+    stroke-linecap: round;
+    transition: stroke-dashoffset 200ms ease;
+  }
+  .article-rail-tools button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--muted);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: color 200ms ease;
+  }
+  .article-rail-tools button:hover {
+    color: var(--accent);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .progress-fill,
+    .article-rail-tools button {
+      transition: none;
+    }
   }
 }
 .article-end {

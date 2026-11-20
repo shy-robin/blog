@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { ArticleBody } from "@/components/article-body";
 import { BackArrow } from "@/components/back-arrow";
 import { ArticleTocNav } from "@/components/article-toc-nav";
+import { ArticleRailTools } from "@/components/article-rail-tools";
 import { PreviewBanner } from "@/components/preview-banner";
 import { getPost, getHeadings, formatDate } from "@/sanity/posts";
 import { imageUrl, imageDimensions } from "@/sanity/images";
@@ -77,6 +78,7 @@ export default async function PostPage({ params }: Props) {
             所有文章
           </Link>
           {!!headings.length && <ArticleTocNav headings={headings} />}
+          <ArticleRailTools />
         </aside>
         <div className="article-layout">
           {!!headings.length && (
