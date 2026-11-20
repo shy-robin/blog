@@ -7,12 +7,14 @@ import { ArticleBody } from "@/components/article-body";
 import { BackArrow } from "@/components/back-arrow";
 import { ArticleTocNav } from "@/components/article-toc-nav";
 import { ArticleRailTools } from "@/components/article-rail-tools";
+import { ArticleMobileToc } from "@/components/article-mobile-toc";
 import { PreviewBanner } from "@/components/preview-banner";
 import { getPost, getHeadings, formatDate } from "@/sanity/posts";
 import { imageUrl, imageDimensions } from "@/sanity/images";
 import { postsUrl } from "@/lib/post-search";
 import { Comments } from "@/components/comments";
 import { getPostMetadata } from "@/lib/seo";
+import { getReadingStats } from "@/lib/reading-stats";
 type Props = { params: Promise<{ slug: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
@@ -30,6 +32,7 @@ export default async function PostPage({ params }: Props) {
   const post = await getPost(slug, draft);
   if (!post) notFound();
   const headings = getHeadings(post.body);
+  const stats = getReadingStats(post.body);
   const cover = imageUrl(post.coverImage);
   return (
     <>
@@ -42,23 +45,24 @@ export default async function PostPage({ params }: Props) {
           </Link>
           <h1>{post.title}</h1>
           <div className="article-meta">
-            <span>ShyRobin</span>
             {post.publishedAt && (
               <time dateTime={post.publishedAt}>
                 {formatDate(post.publishedAt)}
               </time>
             )}
+            <span>约 {stats.minutes} 分钟阅读</span>
+            <span>{stats.words.toLocaleString("zh-CN")} 字</span>
+            {!!post.tags?.length && (
+              <ul className="article-tags" aria-label="文章标签">
+                {post.tags.map((tag) => (
+                  <li key={tag}>
+                    <Link href={postsUrl("", tag)}>{tag}</Link>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
           {post.excerpt && <p className="article-summary">{post.excerpt}</p>}
-          {!!post.tags?.length && (
-            <ul className="tags" aria-label="文章标签">
-              {post.tags.map((tag) => (
-                <li key={tag}>
-                  <Link href={postsUrl("", tag)}>{tag}</Link>
-                </li>
-              ))}
-            </ul>
-          )}
         </header>
         {cover && (
           <div className="article-cover">
@@ -82,21 +86,7 @@ export default async function PostPage({ params }: Props) {
         </aside>
         <div className="article-layout">
           {!!headings.length && (
-            <details className="article-toc">
-              <summary>本文目录</summary>
-              <nav aria-label="文章目录">
-                <ul>
-                  {headings.map((heading) => (
-                    <li
-                      key={heading.id}
-                      className={heading.level === "h3" ? "toc-nested" : ""}
-                    >
-                      <a href={`#${heading.id}`}>{heading.text}</a>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            </details>
+            <ArticleMobileToc title={post.title} headings={headings} />
           )}
           <ArticleBody body={post.body || []} />
         </div>

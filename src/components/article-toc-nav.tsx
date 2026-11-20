@@ -1,14 +1,15 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import { useActiveHeadingId } from "./article-reading";
 
 export function ArticleTocNav({
   headings,
 }: {
   headings: { id: string; text: string; level?: string }[];
 }) {
-  const [activeId, setActiveId] = useState(headings[0]?.id);
   const listRef = useRef<HTMLElement>(null);
+  const activeId = useActiveHeadingId(headings);
 
   useEffect(() => {
     const list = listRef.current;
@@ -22,33 +23,6 @@ export function ArticleTocNav({
     else if (bottom > list.scrollTop + list.clientHeight)
       list.scrollTop = bottom - list.clientHeight;
   }, [activeId]);
-
-  useEffect(() => {
-    let frame = 0;
-    const update = () => {
-      frame = 0;
-      const marker = window.innerHeight * 0.35;
-      let current = headings[0]?.id;
-      for (const heading of headings) {
-        const element = document.getElementById(heading.id);
-        if (!element) continue;
-        if (element.getBoundingClientRect().top > marker) break;
-        current = heading.id;
-      }
-      setActiveId(current);
-    };
-    const schedule = () => {
-      if (!frame) frame = requestAnimationFrame(update);
-    };
-    update();
-    window.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("resize", schedule);
-    return () => {
-      window.removeEventListener("scroll", schedule);
-      window.removeEventListener("resize", schedule);
-      if (frame) cancelAnimationFrame(frame);
-    };
-  }, [headings]);
 
   return (
     <nav ref={listRef} aria-label="文章目录">
